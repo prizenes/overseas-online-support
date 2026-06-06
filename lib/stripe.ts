@@ -3,7 +3,10 @@ import { plans, type ServicePlanId } from "@/lib/service-content";
 
 export function getStripe() {
   const secretKey =
-    process.env.PRAISENESS_PAYMENT_TOKEN_TEST ?? process.env.STRIPE_TEST_SECRET_KEY ?? process.env.STRIPE_SECRET_KEY;
+    process.env.PRAISENESS_PAYMENT_VALUE_TEST ??
+    process.env.PRAISENESS_PAYMENT_TOKEN_TEST ??
+    process.env.STRIPE_TEST_SECRET_KEY ??
+    process.env.STRIPE_SECRET_KEY;
 
   if (!secretKey) {
     throw new Error("Missing Stripe secret key.");
