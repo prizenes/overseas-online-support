@@ -31,7 +31,7 @@ function compact(value: unknown, maxLength = 450) {
 }
 
 export async function POST(request: Request) {
-  if (!process.env.STRIPE_TEST_SECRET_KEY && !process.env.STRIPE_SECRET_KEY) {
+  if (!process.env.PRAISENESS_PAYMENT_TOKEN_TEST && !process.env.STRIPE_TEST_SECRET_KEY && !process.env.STRIPE_SECRET_KEY) {
     return NextResponse.json({ error: "Stripe Secret Keyが設定されていません。" }, { status: 500 });
   }
 
