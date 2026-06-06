@@ -1,25 +1,88 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { consultationTopics } from "@/lib/service-content";
+import { convertLocalDateTimeToJapan, type ConvertedDateTime } from "@/lib/time-zone";
 
 type SubmitState = "idle" | "submitting" | "success" | "error";
 
 const inputClass =
   "mt-2 w-full rounded-md border border-ink/20 bg-white px-4 py-3 text-base text-ink shadow-sm transition focus:border-sea focus:ring-2 focus:ring-sea/20";
 
-const japanTimeOptions = [
-  "日本時間 9:00-11:00",
-  "日本時間 11:00-13:00",
-  "日本時間 13:00-15:00",
-  "日本時間 15:00-17:00",
-  "日本時間 17:00-19:00",
-  "日本時間 9:00-19:00の範囲で相談したい"
+const fallbackTimeZones = [
+  "America/Los_Angeles",
+  "America/New_York",
+  "America/Chicago",
+  "America/Denver",
+  "America/Toronto",
+  "Europe/London",
+  "Europe/Paris",
+  "Europe/Berlin",
+  "Australia/Sydney",
+  "Australia/Melbourne",
+  "Asia/Singapore",
+  "Asia/Bangkok",
+  "Asia/Hong_Kong",
+  "Asia/Tokyo",
+  "Pacific/Auckland"
 ];
+
+type PreferredSlot = {
+  label: string;
+  localDateTime: string;
+  localTimeZone: string;
+  localDisplay: string;
+  japanDisplay: string;
+  isWithinJapanBusinessHours: boolean;
+};
 
 export function ApplyForm() {
   const [state, setState] = useState<SubmitState>("idle");
   const [error, setError] = useState("");
+  const [timeZone, setTimeZone] = useState("Asia/Tokyo");
+  const [detectedTimeZone, setDetectedTimeZone] = useState("");
+  const [preferredDateTimes, setPreferredDateTimes] = useState(["", "", ""]);
+
+  const timeZoneOptions = useMemo(() => {
+    const supportedTimeZones =
+      typeof Intl.supportedValuesOf === "function" ? Intl.supportedValuesOf("timeZone") : fallbackTimeZones;
+    return Array.from(new Set([...fallbackTimeZones, ...supportedTimeZones])).sort();
+  }, []);
+
+  useEffect(() => {
+    const browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    if (browserTimeZone) {
+      setDetectedTimeZone(browserTimeZone);
+      setTimeZone(browserTimeZone);
+    }
+  }, []);
+
+  const convertedSlots = useMemo(
+    () => preferredDateTimes.map((value) => (value ? convertLocalDateTimeToJapan(value, timeZone) : null)),
+    [preferredDateTimes, timeZone]
+  );
+
+  function buildPreferredSlots(): PreferredSlot[] {
+    return preferredDateTimes
+      .map((value, index) => {
+        const converted = convertedSlots[index];
+
+        if (!value || !converted) {
+          return null;
+        }
+
+        return {
+          label: `第${index + 1}希望`,
+          localDateTime: value,
+          localTimeZone: timeZone,
+          localDisplay: converted.localDisplay,
+          japanDisplay: converted.japanDisplay,
+          isWithinJapanBusinessHours: converted.isWithinJapanBusinessHours
+        };
+      })
+      .filter((slot): slot is PreferredSlot => Boolean(slot));
+  }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -34,12 +97,12 @@ export function ApplyForm() {
       name: String(formData.get("name") ?? ""),
       email: String(formData.get("email") ?? ""),
       country: String(formData.get("country") ?? ""),
-      timezone: String(formData.get("timezone") ?? ""),
+      timezone: timeZone,
       topics,
       message: String(formData.get("message") ?? ""),
       consultationFor: String(formData.get("consultationFor") ?? ""),
       contactPreference: String(formData.get("contactPreference") ?? ""),
-      preferredTime: String(formData.get("preferredTime") ?? ""),
+      preferredSlots: buildPreferredSlots(),
       consentLocalCare: formData.get("consentLocalCare") === "on",
       consentNonMedical: formData.get("consentNonMedical") === "on"
     };
@@ -60,6 +123,7 @@ export function ApplyForm() {
       }
 
       form.reset();
+      setPreferredDateTimes(["", "", ""]);
       setState("success");
     } catch (submitError) {
       setState("error");
@@ -109,13 +173,21 @@ export function ApplyForm() {
           居住国
           <input className={inputClass} name="country" autoComplete="country-name" required />
         </label>
-        <label className="font-bold text-ink">
-          居住地のタイムゾーン
-          <input className={inputClass} name="timezone" placeholder="例: America/Los_Angeles, Europe/London" required />
+        <div className="font-bold text-ink">
+          <label htmlFor="timezone">あなたの現在のタイムゾーン</label>
+          <select id="timezone" className={inputClass} name="timezone" value={timeZone} onChange={(event) => setTimeZone(event.target.value)} required>
+            {timeZoneOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
           <span className="mt-2 block text-sm font-semibold leading-6 text-ink/60">
-            受けたい時間ではなく、現在お住まいの地域のタイムゾーンをご記入ください。
+            {detectedTimeZone
+              ? `ブラウザから ${detectedTimeZone} を自動取得しました。違う場合は選択し直してください。`
+              : "自動取得できない場合は、お住まいの地域のタイムゾーンを選択してください。"}
           </span>
-        </label>
+        </div>
       </div>
 
       <fieldset className="rounded-md border border-ink/15 p-4">
@@ -156,20 +228,26 @@ export function ApplyForm() {
         </label>
       </div>
 
-      <label className="font-bold text-ink">
-        希望時間帯（日本時間）
-        <select className={inputClass} name="preferredTime" required>
-          <option value="">選択してください</option>
-          {japanTimeOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
+      <fieldset className="rounded-md border border-ink/15 p-4">
+        <legend className="px-2 text-lg font-bold text-ink">希望日時（あなたの現地時間）</legend>
+        <p className="mt-2 text-base font-semibold leading-7 text-ink/70">
+          お住まいの地域の時間で希望日時を入力してください。入力後、日本時間に自動変換して表示します。日本時間を調べる必要はありません。
+          原則、日本時間9:00〜19:00の範囲で調整しますが、時差の関係で難しい場合はメールでご相談ください。
+        </p>
+        <div className="mt-5 grid gap-5">
+          {preferredDateTimes.map((value, index) => (
+            <DateTimePreference
+              key={index}
+              index={index}
+              value={value}
+              converted={convertedSlots[index]}
+              onChange={(nextValue) =>
+                setPreferredDateTimes((current) => current.map((item, itemIndex) => (itemIndex === index ? nextValue : item)))
+              }
+            />
           ))}
-        </select>
-        <span className="mt-2 block text-sm font-semibold leading-6 text-ink/60">
-          原則、日本時間9:00-19:00の範囲で調整します。時差がある場合はメールで相談できます。
-        </span>
-      </label>
+        </div>
+      </fieldset>
 
       <fieldset className="rounded-md border border-coral/35 bg-coral/5 p-4">
         <legend className="px-2 text-lg font-bold text-ink">確認チェック</legend>
@@ -195,5 +273,45 @@ export function ApplyForm() {
         {state === "submitting" ? "送信しています" : "送信して相談可否を確認する"}
       </button>
     </form>
+  );
+}
+
+function DateTimePreference({
+  index,
+  value,
+  converted,
+  onChange
+}: {
+  index: number;
+  value: string;
+  converted: ConvertedDateTime | null;
+  onChange: (value: string) => void;
+}) {
+  const label = `第${index + 1}希望日時（あなたの現地時間）`;
+
+  return (
+    <label className="font-bold text-ink">
+      {label}
+      <input
+        className={inputClass}
+        name={`preferredDateTime${index + 1}`}
+        type="datetime-local"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        required={index === 0}
+      />
+      {converted ? (
+        <span className="mt-3 block rounded-md bg-mist p-4 text-base font-bold leading-7 text-ink">
+          日本時間：{converted.japanDisplay}
+          <span className={converted.isWithinJapanBusinessHours ? "mt-2 block text-sea" : "mt-2 block text-coral"}>
+            {converted.isWithinJapanBusinessHours
+              ? "対応可能時間内です"
+              : "日本時間の対応時間外です。別の時間をご入力いただくか、メールでご相談ください"}
+          </span>
+        </span>
+      ) : (
+        <span className="mt-2 block text-sm font-semibold leading-6 text-ink/60">入力すると日本時間に自動変換して表示します。</span>
+      )}
+    </label>
   );
 }

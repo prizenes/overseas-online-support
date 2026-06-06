@@ -10,7 +10,14 @@ type InquiryPayload = {
   message?: string;
   consultationFor?: string;
   contactPreference?: string;
-  preferredTime?: string;
+  preferredSlots?: {
+    label?: string;
+    localDateTime?: string;
+    localTimeZone?: string;
+    localDisplay?: string;
+    japanDisplay?: string;
+    isWithinJapanBusinessHours?: boolean;
+  }[];
   consentLocalCare?: boolean;
   consentNonMedical?: boolean;
 };
@@ -22,7 +29,31 @@ function compact(value: unknown, maxLength = 1200) {
     .slice(0, maxLength);
 }
 
-function buildAdminText(payload: Required<InquiryPayload>) {
+type NormalizedInquiryPayload = Omit<Required<InquiryPayload>, "preferredSlots"> & {
+  preferredSlots: {
+    label: string;
+    localDateTime: string;
+    localTimeZone: string;
+    localDisplay: string;
+    japanDisplay: string;
+    isWithinJapanBusinessHours: boolean;
+  }[];
+};
+
+function formatPreferredSlots(slots: NormalizedInquiryPayload["preferredSlots"]) {
+  return slots
+    .map((slot) =>
+      [
+        `${slot.label}:`,
+        `  現地時間: ${slot.localDisplay}`,
+        `  日本時間: ${slot.japanDisplay}`,
+        `  判定: ${slot.isWithinJapanBusinessHours ? "対応可能時間内" : "日本時間の対応時間外"}`
+      ].join("\n")
+    )
+    .join("\n\n");
+}
+
+function buildAdminText(payload: NormalizedInquiryPayload) {
   return [
     "海外在住日本人向けオンライン運動サポートにお問い合わせがありました。",
     "",
@@ -33,7 +64,9 @@ function buildAdminText(payload: Required<InquiryPayload>) {
     `相談したい内容: ${payload.topics.join(", ")}`,
     `本人/家族: ${payload.consultationFor}`,
     `希望する連絡方法: ${payload.contactPreference}`,
-    `希望時間帯（日本時間）: ${payload.preferredTime}`,
+    "",
+    "希望日時:",
+    formatPreferredSlots(payload.preferredSlots),
     "",
     "簡単な相談内容:",
     payload.message,
@@ -46,11 +79,14 @@ function buildAdminText(payload: Required<InquiryPayload>) {
   ].join("\n");
 }
 
-function buildUserText(name: string) {
+function buildUserText(name: string, slots: NormalizedInquiryPayload["preferredSlots"]) {
   return `${name} 様
 
 お問い合わせありがとうございます。
 内容を確認のうえ、初回オンライン相談の対象となるか、日程調整やお支払い方法についてメールでご案内いたします。
+
+送信いただいた希望日時:
+${formatPreferredSlots(slots)}
 
 強い痛み、しびれ、麻痺、急な症状悪化、転倒後の痛みがある場合は、相談日を待たずに現地医療機関へご相談ください。
 
@@ -59,7 +95,20 @@ function buildUserText(name: string) {
 
 export async function POST(request: Request) {
   const body = (await request.json()) as InquiryPayload;
-  const payload: Required<InquiryPayload> = {
+  const preferredSlots = Array.isArray(body.preferredSlots)
+    ? body.preferredSlots
+        .map((slot, index) => ({
+          label: compact(slot.label || `第${index + 1}希望`, 40),
+          localDateTime: compact(slot.localDateTime, 80),
+          localTimeZone: compact(slot.localTimeZone, 120),
+          localDisplay: compact(slot.localDisplay, 160),
+          japanDisplay: compact(slot.japanDisplay, 160),
+          isWithinJapanBusinessHours: Boolean(slot.isWithinJapanBusinessHours)
+        }))
+        .filter((slot) => slot.localDateTime && slot.localTimeZone && slot.japanDisplay)
+    : [];
+
+  const payload: NormalizedInquiryPayload = {
     name: compact(body.name, 120),
     email: compact(body.email, 160),
     country: compact(body.country, 120),
@@ -68,12 +117,12 @@ export async function POST(request: Request) {
     message: compact(body.message),
     consultationFor: compact(body.consultationFor, 120),
     contactPreference: compact(body.contactPreference, 120),
-    preferredTime: compact(body.preferredTime, 400),
+    preferredSlots,
     consentLocalCare: Boolean(body.consentLocalCare),
     consentNonMedical: Boolean(body.consentNonMedical)
   };
 
-  if (!payload.name || !payload.email || !payload.country || !payload.timezone || !payload.message || !payload.preferredTime) {
+  if (!payload.name || !payload.email || !payload.country || !payload.timezone || !payload.message || !payload.preferredSlots.length) {
     return NextResponse.json({ error: "必須項目を入力してください。" }, { status: 400 });
   }
 
@@ -96,7 +145,7 @@ export async function POST(request: Request) {
       userName: payload.name,
       subject: `オンライン運動サポートお問い合わせ: ${payload.name}`,
       adminText: buildAdminText(payload),
-      userText: buildUserText(payload.name)
+      userText: buildUserText(payload.name, payload.preferredSlots)
     });
 
     return NextResponse.json({
