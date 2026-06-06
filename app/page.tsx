@@ -46,10 +46,11 @@ const supportImages = {
 const praisenessOfficialUrl = "https://prizenes.com/";
 
 const therapistProfile = {
-  name: "担当理学療法士",
-  photo: brandAssets.trainers[0].src,
-  photoAlt: "オンライン運動サポートを担当するリハビリジムプライズネスの理学療法士",
+  name: "栗谷川 豊",
+  photo: "/images/overseas-support/therapist-kuriyagawa.jpg",
+  photoAlt: "オンライン運動サポートを担当する栗谷川豊理学療法士",
   qualification: "理学療法士",
+  experience: "理学療法士歴23年目",
   affiliation: "リハビリジムプライズネス",
   specialties: [
     "膝・腰・股関節の運動相談",
@@ -432,6 +433,10 @@ export default function Home() {
                   <div>
                     <dt className="font-bold text-ink">資格</dt>
                     <dd className="text-ink/75">{therapistProfile.qualification}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-bold text-ink">経験</dt>
+                    <dd className="text-ink/75">{therapistProfile.experience}</dd>
                   </div>
                   <div>
                     <dt className="font-bold text-ink">所属</dt>
