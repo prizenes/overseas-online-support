@@ -93,7 +93,7 @@ export default function EnglishPage() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/#apply" className="rounded-md bg-sea px-6 py-3 text-center text-lg font-bold text-white hover:bg-ink">
-                Apply on Japanese page
+                Contact us on Japanese page
               </Link>
               <Link href="/" className="rounded-md border border-sea bg-white px-6 py-3 text-center text-lg font-bold text-sea hover:bg-mist">
                 Japanese LP
@@ -158,7 +158,7 @@ export default function EnglishPage() {
           </div>
           <div className="mt-8">
             <Link href="/#apply" className="inline-flex rounded-md bg-sea px-6 py-3 text-lg font-bold text-white hover:bg-ink">
-              Apply in Japanese
+              Contact us in Japanese
             </Link>
           </div>
         </div>

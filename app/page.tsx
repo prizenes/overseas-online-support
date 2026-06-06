@@ -131,14 +131,14 @@ export default function Home() {
               海外で身体の不安を感じたとき、日本語で相談できる専門家が近くにいないことがあります。プライズネスでは、理学療法士がオンラインで身体の状態や生活状況を確認し、無理なく続けられる運動をサポートします。
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              {["日本語対応", "USD決済", "Zoom対応", "海外在住者向け"].map((label) => (
+              {["日本語対応", "海外在住者向け", "Zoom対応", "USD決済対応", "まずは無料問い合わせ"].map((label) => (
                 <span key={label} className="rounded-md bg-mist px-4 py-2 text-sm font-bold text-sea">
                   {label}
                 </span>
               ))}
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ScrollLink href="#apply">初回相談を申し込む</ScrollLink>
+              <ScrollLink href="#apply">まずは無料で問い合わせる</ScrollLink>
               <ScrollLink href="#service" variant="secondary">
                 サービス内容を見る
               </ScrollLink>
@@ -170,13 +170,13 @@ export default function Home() {
         <div className="mx-auto grid max-w-6xl gap-5 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
           <div>
             <p className="text-sm font-bold text-white/70">初回相談カード</p>
-            <h2 className="mt-2 text-3xl font-black leading-tight">まずは初回オンライン身体相談 60分 $79</h2>
+            <h2 className="mt-2 text-3xl font-black leading-tight">まずは無料問い合わせ。初回オンライン相談は60分 $79</h2>
             <p className="mt-4 text-lg leading-8 text-white/80">
-              身体の不安を整理し、運動を安全に続けるための相談を日本語で行います。決済完了後にZoom URLと事前確認フォームをお送りします。
+              身体の不安を整理し、運動を安全に続けるための相談を日本語で行います。内容確認と日程調整後に、必要に応じてStripe決済リンクをご案内します。
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-            <ScrollLink href="#apply">申し込む</ScrollLink>
+            <ScrollLink href="#apply">相談できるか確認する</ScrollLink>
             <ScrollLink href="#plans" variant="secondary">
               料金を見る
             </ScrollLink>
@@ -193,7 +193,7 @@ export default function Home() {
           ))}
         </div>
         <div className="mt-8">
-          <ScrollLink href="#apply">初回相談を申し込む</ScrollLink>
+          <ScrollLink href="#apply">初回相談について問い合わせる</ScrollLink>
         </div>
       </Section>
 
@@ -222,7 +222,7 @@ export default function Home() {
           ))}
         </div>
         <div className="mt-8">
-          <ScrollLink href="#apply">サービスを申し込む</ScrollLink>
+          <ScrollLink href="#apply">日程と内容を相談する</ScrollLink>
         </div>
       </Section>
 
@@ -303,14 +303,14 @@ export default function Home() {
                 </p>
                 <p className="mt-4 grow leading-7 text-ink/70">{plan.description}</p>
                 <a href="#apply" className="mt-5 rounded-md bg-sea px-4 py-3 text-center font-bold text-white transition hover:bg-ink">
-                  申し込む
+                  このプランについて問い合わせる
                 </a>
               </div>
             );
           })}
         </div>
         <p className="mt-8 rounded-md bg-white p-5 text-lg leading-8 text-ink/75">
-          月2回・月4回は継続サポートです。時差を考慮し、日本時間の朝・夜など可能な範囲で日程調整します。
+          月2回・月4回は継続サポートです。決済は問い合わせ後に個別のStripe決済リンクでご案内します。時差を考慮し、日本時間の朝・夜など可能な範囲で日程調整します。
         </p>
       </Section>
 
@@ -353,9 +353,9 @@ export default function Home() {
 
       <Section
         id="apply"
-        eyebrow="お申し込み"
-        title="申込フォーム"
-        description="送信後、選択したサービスのStripe Checkoutへ進みます。入力内容は日程調整と事前確認のために利用します。"
+        eyebrow="無料お問い合わせ"
+        title="無料お問い合わせフォーム"
+        description="送信後すぐに決済へ進むことはありません。入力内容を確認し、相談可否、日程調整、お支払い方法についてメールでご案内します。"
         tone="paper"
       >
         <ApplyForm />
@@ -368,7 +368,7 @@ export default function Home() {
             腰痛・膝痛・股関節痛・歩行不安に対する運動相談から、海外在住の親や家族の体力低下の不安まで、まずは初回相談で状況をお聞かせください。
           </p>
           <div className="mt-8">
-            <ScrollLink href="#apply">初回相談を申し込む</ScrollLink>
+            <ScrollLink href="#apply">まずは無料で問い合わせる</ScrollLink>
           </div>
         </div>
       </section>

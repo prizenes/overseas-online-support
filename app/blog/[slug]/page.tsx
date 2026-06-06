@@ -105,10 +105,10 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
         <div className="mt-12 rounded-md bg-ink p-6 text-white">
           <h2 className="text-2xl font-bold">まずは初回オンライン身体相談 60分 $79</h2>
           <p className="mt-4 leading-8 text-white/80">
-            身体の不安を整理し、運動を安全に続けるための相談を日本語で行います。家族同席も可能です。
+            身体の不安を整理し、運動を安全に続けるための相談を日本語で行います。家族同席も可能です。まずは無料問い合わせで相談可否を確認します。
           </p>
           <Link href="/#apply" className="mt-6 inline-flex rounded-md bg-sea px-6 py-3 font-bold text-white hover:bg-white hover:text-ink">
-            初回相談を申し込む
+            初回相談について問い合わせる
           </Link>
         </div>
       </article>
