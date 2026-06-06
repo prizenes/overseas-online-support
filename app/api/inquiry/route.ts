@@ -24,16 +24,16 @@ function compact(value: unknown, maxLength = 1200) {
 
 function buildAdminText(payload: Required<InquiryPayload>) {
   return [
-    "海外在住日本人向けオンライン運動サポートに問い合わせがありました。",
+    "海外在住日本人向けオンライン運動サポートにお問い合わせがありました。",
     "",
     `お名前: ${payload.name}`,
     `メールアドレス: ${payload.email}`,
     `居住国: ${payload.country}`,
-    `タイムゾーン: ${payload.timezone}`,
+    `居住地のタイムゾーン: ${payload.timezone}`,
     `相談したい内容: ${payload.topics.join(", ")}`,
     `本人/家族: ${payload.consultationFor}`,
     `希望する連絡方法: ${payload.contactPreference}`,
-    `希望時間帯: ${payload.preferredTime}`,
+    `希望時間帯（日本時間）: ${payload.preferredTime}`,
     "",
     "簡単な相談内容:",
     payload.message,
@@ -73,7 +73,7 @@ export async function POST(request: Request) {
     consentNonMedical: Boolean(body.consentNonMedical)
   };
 
-  if (!payload.name || !payload.email || !payload.country || !payload.timezone || !payload.message) {
+  if (!payload.name || !payload.email || !payload.country || !payload.timezone || !payload.message || !payload.preferredTime) {
     return NextResponse.json({ error: "必須項目を入力してください。" }, { status: 400 });
   }
 
@@ -94,18 +94,20 @@ export async function POST(request: Request) {
       fromEmail,
       userEmail: payload.email,
       userName: payload.name,
-      subject: `オンライン運動サポート問い合わせ: ${payload.name}`,
+      subject: `オンライン運動サポートお問い合わせ: ${payload.name}`,
       adminText: buildAdminText(payload),
       userText: buildUserText(payload.name)
     });
 
     return NextResponse.json({
       ok: true,
+      adminEmail,
       emailStatus
     });
   } catch {
     return NextResponse.json({
       ok: true,
+      adminEmail,
       emailStatus: {
         adminEmailSent: false,
         userEmailSent: false

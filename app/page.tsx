@@ -147,6 +147,10 @@ export default function Home() {
               <Link href="/en" className="text-sm font-bold text-sea underline underline-offset-4">
                 English support page
               </Link>
+              <span className="mx-3 text-ink/30">/</span>
+              <Link href="/apply" className="text-sm font-bold text-sea underline underline-offset-4">
+                正式申込・決済案内
+              </Link>
             </div>
           </div>
           <div className="flex-1">

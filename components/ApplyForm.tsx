@@ -8,6 +8,15 @@ type SubmitState = "idle" | "submitting" | "success" | "error";
 const inputClass =
   "mt-2 w-full rounded-md border border-ink/20 bg-white px-4 py-3 text-base text-ink shadow-sm transition focus:border-sea focus:ring-2 focus:ring-sea/20";
 
+const japanTimeOptions = [
+  "日本時間 9:00-11:00",
+  "日本時間 11:00-13:00",
+  "日本時間 13:00-15:00",
+  "日本時間 15:00-17:00",
+  "日本時間 17:00-19:00",
+  "日本時間 9:00-19:00の範囲で相談したい"
+];
+
 export function ApplyForm() {
   const [state, setState] = useState<SubmitState>("idle");
   const [error, setError] = useState("");
@@ -65,6 +74,9 @@ export function ApplyForm() {
         <p className="mt-4 text-lg leading-8 text-ink/75">
           内容を確認のうえ、初回オンライン相談の対象となるか、日程調整やお支払い方法についてメールでご案内いたします。
         </p>
+        <p className="mt-4 rounded-md bg-mist p-4 text-base font-bold leading-7 text-ink">
+          通知先は管理者メール mail@prizenes.com です。メール送信設定が有効な場合、自動返信もお送りします。
+        </p>
         <button
           type="button"
           onClick={() => setState("idle")}
@@ -98,8 +110,11 @@ export function ApplyForm() {
           <input className={inputClass} name="country" autoComplete="country-name" required />
         </label>
         <label className="font-bold text-ink">
-          タイムゾーン
-          <input className={inputClass} name="timezone" placeholder="例: America/Los_Angeles" required />
+          居住地のタイムゾーン
+          <input className={inputClass} name="timezone" placeholder="例: America/Los_Angeles, Europe/London" required />
+          <span className="mt-2 block text-sm font-semibold leading-6 text-ink/60">
+            受けたい時間ではなく、現在お住まいの地域のタイムゾーンをご記入ください。
+          </span>
         </label>
       </div>
 
@@ -142,8 +157,18 @@ export function ApplyForm() {
       </div>
 
       <label className="font-bold text-ink">
-        希望時間帯
-        <textarea className={inputClass} name="preferredTime" rows={3} placeholder="例: 平日夜、日本時間の午前、週末など" required />
+        希望時間帯（日本時間）
+        <select className={inputClass} name="preferredTime" required>
+          <option value="">選択してください</option>
+          {japanTimeOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        <span className="mt-2 block text-sm font-semibold leading-6 text-ink/60">
+          原則、日本時間9:00-19:00の範囲で調整します。時差がある場合はメールで相談できます。
+        </span>
       </label>
 
       <fieldset className="rounded-md border border-coral/35 bg-coral/5 p-4">
