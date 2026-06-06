@@ -1,5 +1,51 @@
 export const serviceName = "海外在住日本人のためのオンライン運動サポート";
 
+export const brandAssets = {
+  logo: "https://prizenes.com/common/upload_data/prizenescom/image/logo1.png",
+  hero: [
+    {
+      src: "https://prizenes.com/images/convert/prizenescom/20221202101242.jpg/image.webp",
+      alt: "リハビリジムプライズネスのトレーニング風景"
+    },
+    {
+      src: "https://prizenes.com/images/convert/prizenescom/20221202100510.jpg/image.webp",
+      alt: "リハビリジムプライズネスの施設内"
+    },
+    {
+      src: "https://prizenes.com/images/convert/prizenescom/20221202100920.jpg/image.webp",
+      alt: "理学療法士による運動サポートの様子"
+    }
+  ],
+  trainers: [
+    {
+      src: "https://prizenes.com/images/convert/prizenescom/20250809091854.jpg/image.webp",
+      alt: "成田悟志 理学療法士"
+    },
+    {
+      src: "https://prizenes.com/images/convert/prizenescom/20250809091916.jpg/image.webp",
+      alt: "栗谷川豊 理学療法士"
+    },
+    {
+      src: "https://prizenes.com/images/convert/prizenescom/20250809085957.jpg/image.webp",
+      alt: "岡部浩季 理学療法士"
+    }
+  ],
+  facility: [
+    {
+      src: "https://prizenes.com/images/convert/prizenescom/20221111170823.jpg/image.webp",
+      alt: "リハビリジムプライズネスのトレーニングルーム"
+    },
+    {
+      src: "https://prizenes.com/images/convert/prizenescom/de24bfb740ef7421e00b7346ea704e3e.jpeg/image.webp",
+      alt: "豊富なトレーニング器具"
+    },
+    {
+      src: "https://prizenes.com/images/convert/prizenescom/1e9b14117c20116e7402e9b12c1df6a7-1-300x300.jpeg/image.webp",
+      alt: "身体の状態確認の様子"
+    }
+  ]
+};
+
 export const concerns = [
   "海外で身体の不安を日本語で相談できない",
   "膝や腰が痛いが、運動してよいかわからない",

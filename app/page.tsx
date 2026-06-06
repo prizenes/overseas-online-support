@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ApplyForm } from "@/components/ApplyForm";
 import { Section } from "@/components/Section";
 import {
+  brandAssets,
   concerns,
   faqs,
   flowSteps,
@@ -48,7 +49,10 @@ export default function Home() {
       <section className="relative overflow-hidden bg-paper px-5 pb-16 pt-8 sm:px-8 lg:pb-24">
         <div className="mx-auto flex max-w-6xl flex-col gap-10 lg:flex-row lg:items-center">
           <div className="max-w-3xl flex-1">
-            <p className="mb-4 text-sm font-bold uppercase tracking-[0.16em] text-sea">Praiseness Online Support</p>
+            <div className="mb-6 flex items-center gap-4">
+              <img src={brandAssets.logo} alt="リハビリジムプライズネス" className="h-12 w-auto object-contain" />
+              <p className="text-sm font-bold uppercase tracking-[0.16em] text-sea">Praiseness Online Support</p>
+            </div>
             <h1 className="text-4xl font-black leading-tight text-ink sm:text-5xl lg:text-6xl">{serviceName}</h1>
             <p className="mt-6 text-2xl font-bold leading-9 text-leaf">腰痛・膝痛・歩行不安を、日本語で理学療法士に相談。</p>
             <p className="mt-6 text-lg leading-8 text-ink/75 sm:text-xl sm:leading-9">
@@ -61,14 +65,26 @@ export default function Home() {
               </ScrollLink>
             </div>
           </div>
-          <div className="flex-1 rounded-md bg-mist p-6 shadow-soft lg:p-8">
-            <div className="rounded-md bg-white p-5">
-              <p className="text-sm font-bold text-sea">USD / Stripe Checkout</p>
-              <p className="mt-3 text-3xl font-black text-ink">$79</p>
-              <p className="mt-2 text-lg font-bold text-ink">初回オンライン身体相談 60分</p>
-              <p className="mt-4 leading-7 text-ink/70">
-                決済完了後にZoom URLと事前確認フォームをお送りします。単発相談、月額サポート、動画フォームチェックに対応しています。
-              </p>
+          <div className="flex-1">
+            <div className="grid grid-cols-5 gap-3">
+              <img
+                src={brandAssets.hero[0].src}
+                alt={brandAssets.hero[0].alt}
+                className="col-span-5 aspect-[16/11] rounded-md object-cover shadow-soft"
+              />
+              <img
+                src={brandAssets.hero[1].src}
+                alt={brandAssets.hero[1].alt}
+                className="col-span-3 aspect-[4/3] rounded-md object-cover shadow-soft"
+              />
+              <div className="col-span-2 flex flex-col justify-between rounded-md bg-white p-4 shadow-soft">
+                <img src={brandAssets.hero[2].src} alt={brandAssets.hero[2].alt} className="aspect-square rounded-md object-cover" />
+                <div className="mt-4">
+                  <p className="text-sm font-bold text-sea">USD / Stripe Checkout</p>
+                  <p className="mt-2 text-3xl font-black text-ink">$79</p>
+                  <p className="mt-1 text-base font-bold leading-6 text-ink">初回オンライン身体相談 60分</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -95,6 +111,33 @@ export default function Home() {
           {serviceFeatures.map((feature) => (
             <div key={feature} className="rounded-md bg-white p-5 text-lg font-semibold leading-8 shadow-sm">
               {feature}
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        eyebrow="Praiseness"
+        title="札幌のリハビリジムで培った、理学療法士による運動継続支援"
+        description="プライズネスは、理学療法士が一人ひとりの身体の状態や生活背景を確認し、続けやすい運動を支えるリハビリジムです。海外向けオンラインサポートでも、その考え方をもとに、日本語で身体の不安を整理し、無理のないセルフケアを支援します。"
+        tone="white"
+      >
+        <div className="grid gap-6 lg:grid-cols-3">
+          {brandAssets.facility.map((image) => (
+            <figure key={image.src} className="rounded-md bg-mist p-3">
+              <img src={image.src} alt={image.alt} className="aspect-[4/3] w-full rounded-md object-cover" />
+              <figcaption className="mt-3 px-1 text-base font-bold leading-7 text-ink">{image.alt}</figcaption>
+            </figure>
+          ))}
+        </div>
+        <div className="mt-8 grid gap-4 rounded-md bg-paper p-5 sm:grid-cols-3">
+          {brandAssets.trainers.map((trainer) => (
+            <div key={trainer.src} className="flex items-center gap-4">
+              <img src={trainer.src} alt={trainer.alt} className="h-20 w-20 shrink-0 rounded-md object-cover" />
+              <div>
+                <p className="text-sm font-bold text-sea">理学療法士</p>
+                <p className="mt-1 text-base font-bold leading-6 text-ink">{trainer.alt.replace(" 理学療法士", "")}</p>
+              </div>
             </div>
           ))}
         </div>
