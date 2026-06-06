@@ -2,11 +2,13 @@ import Stripe from "stripe";
 import { plans, type ServicePlanId } from "@/lib/service-content";
 
 export function getStripe() {
-  if (!process.env.STRIPE_SECRET_KEY) {
+  const secretKey = process.env.STRIPE_TEST_SECRET_KEY ?? process.env.STRIPE_SECRET_KEY;
+
+  if (!secretKey) {
     throw new Error("Missing Stripe secret key.");
   }
 
-  return new Stripe(process.env.STRIPE_SECRET_KEY, {
+  return new Stripe(secretKey, {
     typescript: true
   });
 }
