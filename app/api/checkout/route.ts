@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getBaseUrl, getPlanForCheckout, getStripe } from "@/lib/stripe";
+import { getBaseUrl, getPlanForCheckout, getStripe, getStripeSecretKeySource } from "@/lib/stripe";
 import type { ServicePlanId } from "@/lib/service-content";
 
 type CheckoutPayload = {
@@ -75,7 +75,19 @@ export async function POST(request: Request) {
 
   const { plan, priceId } = checkoutPlan;
   const baseUrl = getBaseUrl(request);
+  const secretKeySource = getStripeSecretKeySource();
   const stripe = getStripe();
+
+  console.info("Stripe Checkout configuration", {
+    planId: plan.id,
+    priceId,
+    secretKeyEnv: secretKeySource?.name,
+    secretKeyMode: secretKeySource?.value.startsWith("sk_test_")
+      ? "test"
+      : secretKeySource?.value.startsWith("sk_live_")
+        ? "live"
+        : "unknown"
+  });
 
   try {
     const session = await stripe.checkout.sessions.create({

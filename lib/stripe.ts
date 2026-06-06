@@ -1,12 +1,41 @@
 import Stripe from "stripe";
 import { plans, type ServicePlanId } from "@/lib/service-content";
 
+export function getStripeSecretKeySource() {
+  if (process.env.PRAISENESS_PAYMENT_VALUE_TEST) {
+    return {
+      name: "PRAISENESS_PAYMENT_VALUE_TEST",
+      value: process.env.PRAISENESS_PAYMENT_VALUE_TEST
+    };
+  }
+
+  if (process.env.PRAISENESS_PAYMENT_TOKEN_TEST) {
+    return {
+      name: "PRAISENESS_PAYMENT_TOKEN_TEST",
+      value: process.env.PRAISENESS_PAYMENT_TOKEN_TEST
+    };
+  }
+
+  if (process.env.STRIPE_TEST_SECRET_KEY) {
+    return {
+      name: "STRIPE_TEST_SECRET_KEY",
+      value: process.env.STRIPE_TEST_SECRET_KEY
+    };
+  }
+
+  if (process.env.STRIPE_SECRET_KEY) {
+    return {
+      name: "STRIPE_SECRET_KEY",
+      value: process.env.STRIPE_SECRET_KEY
+    };
+  }
+
+  return null;
+}
+
 export function getStripe() {
-  const secretKey =
-    process.env.PRAISENESS_PAYMENT_VALUE_TEST ??
-    process.env.PRAISENESS_PAYMENT_TOKEN_TEST ??
-    process.env.STRIPE_TEST_SECRET_KEY ??
-    process.env.STRIPE_SECRET_KEY;
+  const secretKeySource = getStripeSecretKeySource();
+  const secretKey = secretKeySource?.value;
 
   if (!secretKey) {
     throw new Error("Missing Stripe secret key.");
