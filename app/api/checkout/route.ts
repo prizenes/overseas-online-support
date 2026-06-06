@@ -107,7 +107,14 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ url: session.url });
-  } catch {
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error("Stripe Checkout session creation failed", {
+        name: error.name,
+        message: error.message
+      });
+    }
+
     return NextResponse.json({ error: "Stripe Checkoutの作成に失敗しました。環境変数とPrice IDを確認してください。" }, { status: 500 });
   }
 }
