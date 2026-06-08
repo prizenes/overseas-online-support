@@ -260,17 +260,18 @@ export default function Home() {
       <section className="bg-ink px-5 py-8 text-white sm:px-8">
         <div className="mx-auto grid max-w-6xl gap-5 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
           <div>
-            <p className="text-sm font-bold text-white/70">無料お問い合わせから始めます</p>
-            <h2 className="mt-2 text-3xl font-black leading-tight">いきなり決済ではなく、内容確認と日程調整を先に行います</h2>
+            <p className="text-sm font-bold text-white/70">この段階ではお支払いは発生しません。</p>
+            <h2 className="mt-2 text-3xl font-black leading-tight">まずは無料でご相談ください</h2>
             <p className="mt-4 text-lg leading-8 text-white/80">
-              身体の不安を整理し、相談内容に合うかを確認してから、必要に応じてStripe決済リンクをご案内します。
+              海外で身体の不安を感じたとき、日本語で相談できる場所があるだけでも安心につながります。
+              膝や腰の不安、運動を始めるべきか迷っていること、現地での説明がわかりにくいことなど、まずは現在のお悩みをお聞かせください。
+            </p>
+            <p className="mt-3 text-lg leading-8 text-white/80">
+              初回オンライン相談をご希望の場合は、内容を確認したうえで、日程調整やご利用の流れをご案内します。
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-            <ScrollLink href="#apply">相談できるか確認する</ScrollLink>
-            <ScrollLink href="#plans" variant="secondary">
-              料金を見る
-            </ScrollLink>
+            <ScrollLink href="#apply">無料で相談する</ScrollLink>
           </div>
         </div>
       </section>
