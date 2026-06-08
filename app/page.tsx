@@ -260,8 +260,7 @@ export default function Home() {
       <section className="bg-ink px-5 py-8 text-white sm:px-8">
         <div className="mx-auto grid max-w-6xl gap-5 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
           <div>
-            <p className="text-sm font-bold text-white/70">この段階ではお支払いは発生しません。</p>
-            <h2 className="mt-2 text-3xl font-black leading-tight">まずは無料でご相談ください</h2>
+            <h2 className="text-3xl font-black leading-tight">まずは無料でご相談ください</h2>
             <p className="mt-4 text-lg leading-8 text-white/80">
               海外で身体の不安を感じたとき、日本語で相談できる場所があるだけでも安心につながります。
               膝や腰の不安、運動を始めるべきか迷っていること、現地での説明がわかりにくいことなど、まずは現在のお悩みをお聞かせください。
