@@ -134,19 +134,16 @@ export function ApplyForm() {
   if (state === "success") {
     return (
       <div className="rounded-md bg-white p-6 shadow-soft sm:p-8">
-        <p className="text-2xl font-black leading-9 text-ink">お問い合わせありがとうございます。</p>
+        <p className="text-2xl font-black leading-9 text-ink">無料相談を送信しました。</p>
         <p className="mt-4 text-lg leading-8 text-ink/75">
-          内容を確認のうえ、初回オンライン相談の対象となるか、日程調整やお支払い方法についてメールでご案内いたします。
-        </p>
-        <p className="mt-4 rounded-md bg-mist p-4 text-base font-bold leading-7 text-ink">
-          通知先は管理者メール mail@prizenes.com です。メール送信設定が有効な場合、自動返信もお送りします。
+          内容を確認のうえ、初回オンライン相談の対象となるか、日程調整やご利用の流れについてメールでご案内いたします。
         </p>
         <button
           type="button"
           onClick={() => setState("idle")}
           className="mt-6 rounded-md border border-sea bg-white px-5 py-3 font-bold text-sea transition hover:bg-mist"
         >
-          続けて問い合わせる
+          続けて相談する
         </button>
       </div>
     );
@@ -156,7 +153,7 @@ export function ApplyForm() {
     <form onSubmit={handleSubmit} className="grid gap-6 rounded-md bg-white p-5 shadow-soft sm:p-8">
       <div className="rounded-md bg-mist p-4">
         <p className="text-lg font-bold leading-8 text-ink">
-          送信後すぐに決済へ進むことはありません。内容を確認し、相談可否・日程・Stripe決済リンクについてメールでご案内します。
+          現在のお悩みや希望日時をお聞かせください。内容を確認し、初回オンライン相談の対象となるか、日程調整やご利用の流れをメールでご案内します。
         </p>
       </div>
 
@@ -270,7 +267,7 @@ export function ApplyForm() {
         disabled={state === "submitting"}
         className="rounded-md bg-sea px-6 py-4 text-lg font-bold text-white transition hover:bg-ink disabled:cursor-not-allowed disabled:bg-ink/45"
       >
-        {state === "submitting" ? "送信しています" : "送信して相談可否を確認する"}
+        {state === "submitting" ? "送信しています" : "無料相談を送信する"}
       </button>
     </form>
   );

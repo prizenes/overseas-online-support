@@ -18,7 +18,7 @@ import { organizationJsonLd, siteUrl } from "@/lib/site";
 const pageTitle =
   "海外在住日本人のオンライン運動サポート｜腰痛・膝痛・歩行不安を日本語で理学療法士に相談";
 const pageDescription =
-  "海外在住の日本人向けに、理学療法士が日本語でオンライン身体相談・運動サポートを行います。腰痛、膝痛、股関節痛、歩行不安、転倒不安、運動不足、病院リハビリ後の運動継続をサポート。料金はUSD建て、Stripe決済対応。";
+  "海外在住の日本人向けに、理学療法士が日本語でオンライン身体相談・運動サポートを行います。腰痛、膝痛、股関節痛、歩行不安、転倒不安、運動不足、病院リハビリ後の運動継続をサポート。まずは無料で相談できます。";
 
 const supportImages = {
   hero: {
@@ -165,7 +165,7 @@ const inquiryFlow = [
   "無料お問い合わせ",
   "内容確認",
   "日程調整",
-  "Stripe決済リンク送付",
+  "ご利用方法のご案内",
   "事前確認フォーム入力",
   "Zoomでオンライン相談",
   "運動メニュー共有",
@@ -192,7 +192,7 @@ export default function Home() {
       <JsonLd data={faqJsonLd} />
 
       <section className="relative overflow-hidden bg-paper px-5 pb-12 pt-8 sm:px-8 lg:pb-20">
-        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1fr_0.95fr] lg:items-center">
+        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div className="max-w-3xl">
             <div className="mb-6 flex items-center gap-4">
               <img
@@ -209,28 +209,24 @@ export default function Home() {
               腰痛・膝痛・歩行不安を、日本語で理学療法士に相談。
             </p>
             <p className="mt-6 text-lg leading-8 text-ink/75 sm:text-xl sm:leading-9">
-              まずは無料でお問い合わせください。内容を確認したうえで、初回オンライン相談の対象となるか、日程やお支払い方法をご案内します。
+              海外で身体の不安を感じたとき、日本語で相談できる場所があるだけでも安心につながります。膝や腰の不安、運動を始めるべきか迷っていることなど、まずは現在のお悩みをお聞かせください。
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              {["日本語対応", "海外在住者向け", "Zoom対応", "USD決済対応", "まずは無料問い合わせ"].map((label) => (
+              {["日本語対応", "海外在住者向け", "Zoom対応", "家族同席可", "まずは無料相談"].map((label) => (
                 <span key={label} className="rounded-md bg-mist px-4 py-2 text-sm font-bold text-sea">
                   {label}
                 </span>
               ))}
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ScrollLink href="#apply">まずは無料で問い合わせる</ScrollLink>
+              <ScrollLink href="#apply">無料で相談する</ScrollLink>
               <ScrollLink href="#service" variant="secondary">
                 サービス内容を見る
               </ScrollLink>
             </div>
             <div className="mt-5">
               <Link href="/en" className="text-sm font-bold text-sea underline underline-offset-4">
-                English support page
-              </Link>
-              <span className="mx-3 text-ink/30">/</span>
-              <Link href="/apply" className="text-sm font-bold text-sea underline underline-offset-4">
-                初回相談の流れを見る
+                英語補助ページ
               </Link>
             </div>
           </div>
@@ -244,12 +240,12 @@ export default function Home() {
                 height={900}
                 priority
                 sizes="(min-width: 1024px) 46vw, 100vw"
-                className="aspect-[16/11] w-full object-cover"
+                className="aspect-[16/12] w-full object-cover sm:aspect-[16/10] lg:min-h-[560px]"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-white/35 via-white/5 to-transparent" />
             </div>
             <div className="relative -mt-10 ml-auto mr-4 max-w-xs rounded-md bg-white p-5 shadow-soft">
-              <p className="text-sm font-black text-coral">まずは初回60分</p>
+              <p className="text-sm font-black text-coral">まずは無料相談</p>
               <p className="mt-2 text-4xl font-black text-ink">$79</p>
               <p className="mt-1 text-base font-bold leading-6 text-ink">オンライン身体相談</p>
             </div>
@@ -294,7 +290,7 @@ export default function Home() {
           </div>
         </div>
         <div className="mt-8">
-          <ScrollLink href="#apply">初回相談について問い合わせる</ScrollLink>
+          <ScrollLink href="#apply">無料で相談する</ScrollLink>
         </div>
       </Section>
 
@@ -344,7 +340,7 @@ export default function Home() {
           />
         </div>
         <div className="mt-8">
-          <ScrollLink href="#apply">日程と内容を相談する</ScrollLink>
+          <ScrollLink href="#apply">無料で相談する</ScrollLink>
         </div>
       </Section>
 
@@ -503,7 +499,7 @@ export default function Home() {
       <Section
         id="plans"
         title="料金プラン"
-        description="料金はUSD建てです。決済は無料お問い合わせ後、内容確認と日程調整を行ったうえで、個別のStripe決済リンクをご案内します。カード会社により、現地通貨への換算手数料が発生する場合があります。"
+        description="料金は目安です。まずは無料相談で内容を確認し、初回オンライン相談や継続サポートが合いそうな場合に、ご利用の流れを個別にご案内します。"
         tone="mist"
       >
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
@@ -524,7 +520,7 @@ export default function Home() {
                 </p>
                 <p className="mt-4 grow leading-7 text-ink/70">{plan.description}</p>
                 <a href="#apply" className="mt-5 rounded-md bg-sea px-4 py-3 text-center font-bold text-white transition hover:bg-ink">
-                  このプランについて問い合わせる
+                  このプランについて相談する
                 </a>
               </div>
             );
@@ -573,9 +569,9 @@ export default function Home() {
 
       <Section
         id="apply"
-        eyebrow="無料お問い合わせ"
-        title="無料お問い合わせフォーム"
-        description="送信後すぐに決済へ進むことはありません。入力内容を確認し、相談可否、日程調整、お支払い方法についてメールでご案内します。"
+        eyebrow="無料相談"
+        title="無料相談フォーム"
+        description="現在のお悩みや希望日時をお聞かせください。内容を確認し、初回オンライン相談の対象となるか、日程調整やご利用の流れをメールでご案内します。"
         tone="paper"
       >
         <ApplyForm />
@@ -590,7 +586,7 @@ export default function Home() {
             腰痛・膝痛・股関節痛・歩行不安に対する運動相談から、海外在住の親や家族の体力低下の不安まで、まずは無料お問い合わせで状況をお聞かせください。
           </p>
           <div className="mt-8">
-            <ScrollLink href="#apply">送信して相談可否を確認する</ScrollLink>
+            <ScrollLink href="#apply">無料で相談する</ScrollLink>
           </div>
         </div>
       </section>
