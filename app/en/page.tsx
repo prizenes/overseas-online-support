@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { TrackedLink } from "@/components/TrackedLink";
 import { brandAssets, plans } from "@/lib/service-content";
@@ -161,6 +162,9 @@ export default function EnglishPage() {
                 Go to Japanese page
               </TrackedLink>
             </div>
+            <Link href="/en/blog" className="mt-5 inline-flex text-sm font-bold text-sea underline underline-offset-4">
+              Read English articles
+            </Link>
           </div>
           <div className="grid grid-cols-5 gap-3">
             <img src={brandAssets.hero[0].src} alt={brandAssets.hero[0].alt} className="col-span-5 aspect-[16/11] rounded-md object-cover shadow-soft" />
