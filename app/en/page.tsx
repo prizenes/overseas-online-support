@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
+import { TrackedLink } from "@/components/TrackedLink";
 import { brandAssets, plans } from "@/lib/service-content";
 import { organizationJsonLd, siteUrl } from "@/lib/site";
 
@@ -98,9 +98,13 @@ const faq = [
 
 function CtaLink({ children }: { children: React.ReactNode }) {
   return (
-    <Link href="/#apply" className="inline-flex min-h-12 items-center justify-center rounded-md bg-sea px-6 py-3 text-base font-bold text-white transition hover:bg-ink sm:text-lg">
+    <TrackedLink
+      href="/#apply"
+      eventName="click_language_switch_ja"
+      className="inline-flex min-h-12 items-center justify-center rounded-md bg-sea px-6 py-3 text-base font-bold text-white transition hover:bg-ink sm:text-lg"
+    >
       {children}
-    </Link>
+    </TrackedLink>
   );
 }
 
@@ -149,9 +153,13 @@ export default function EnglishPage() {
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <CtaLink>Contact us in Japanese</CtaLink>
-              <Link href="/" className="inline-flex min-h-12 items-center justify-center rounded-md border border-sea bg-white px-6 py-3 text-base font-bold text-sea transition hover:bg-mist sm:text-lg">
+              <TrackedLink
+                href="/"
+                eventName="click_language_switch_ja"
+                className="inline-flex min-h-12 items-center justify-center rounded-md border border-sea bg-white px-6 py-3 text-base font-bold text-sea transition hover:bg-mist sm:text-lg"
+              >
                 Go to Japanese page
-              </Link>
+              </TrackedLink>
             </div>
           </div>
           <div className="grid grid-cols-5 gap-3">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 import { consultationTopics } from "@/lib/service-content";
 import { convertLocalDateTimeToJapan, type ConvertedDateTime } from "@/lib/time-zone";
 
@@ -124,6 +125,7 @@ export function ApplyForm() {
 
       form.reset();
       setPreferredDateTimes(["", "", ""]);
+      trackEvent("submit_contact_form");
       setState("success");
     } catch (submitError) {
       setState("error");

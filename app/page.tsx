@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { ApplyForm } from "@/components/ApplyForm";
 import { JsonLd } from "@/components/JsonLd";
 import { Section } from "@/components/Section";
+import { TrackedLink } from "@/components/TrackedLink";
+import type { AnalyticsEventName } from "@/lib/analytics";
 import {
   brandAssets,
   concerns,
@@ -92,11 +93,13 @@ export const metadata: Metadata = {
 function ScrollLink({
   href,
   children,
-  variant = "primary"
+  variant = "primary",
+  eventName
 }: {
   href: string;
   children: React.ReactNode;
   variant?: "primary" | "secondary";
+  eventName?: AnalyticsEventName;
 }) {
   const className =
     variant === "primary"
@@ -104,12 +107,13 @@ function ScrollLink({
       : "border border-sea bg-white text-sea hover:bg-mist";
 
   return (
-    <a
+    <TrackedLink
       href={href}
+      eventName={eventName}
       className={`${className} inline-flex min-h-12 items-center justify-center rounded-md px-6 py-3 text-base font-bold transition sm:text-lg`}
     >
       {children}
-    </a>
+    </TrackedLink>
   );
 }
 
@@ -219,15 +223,15 @@ export default function Home() {
               ))}
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ScrollLink href="#apply">無料で相談する</ScrollLink>
+              <ScrollLink href="#apply" eventName="click_free_consultation">無料で相談する</ScrollLink>
               <ScrollLink href="#service" variant="secondary">
                 サービス内容を見る
               </ScrollLink>
             </div>
             <div className="mt-5">
-              <Link href="/en" className="text-sm font-bold text-sea underline underline-offset-4">
+              <TrackedLink href="/en" eventName="click_language_switch_en" className="text-sm font-bold text-sea underline underline-offset-4">
                 英語補助ページ
-              </Link>
+              </TrackedLink>
             </div>
           </div>
 
@@ -266,7 +270,7 @@ export default function Home() {
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-            <ScrollLink href="#apply">無料で相談する</ScrollLink>
+            <ScrollLink href="#apply" eventName="click_free_consultation">無料で相談する</ScrollLink>
           </div>
         </div>
       </section>
@@ -290,7 +294,7 @@ export default function Home() {
           </div>
         </div>
         <div className="mt-8">
-          <ScrollLink href="#apply">無料で相談する</ScrollLink>
+          <ScrollLink href="#apply" eventName="click_free_consultation">無料で相談する</ScrollLink>
         </div>
       </Section>
 
@@ -340,7 +344,7 @@ export default function Home() {
           />
         </div>
         <div className="mt-8">
-          <ScrollLink href="#apply">無料で相談する</ScrollLink>
+          <ScrollLink href="#apply" eventName="click_free_consultation">無料で相談する</ScrollLink>
         </div>
       </Section>
 
@@ -401,15 +405,16 @@ export default function Home() {
               </p>
             </div>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <a
+              <TrackedLink
                 href={praisenessOfficialUrl}
+                eventName="click_priseness_official_site"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex min-h-12 items-center justify-center rounded-md bg-sea px-6 py-3 text-base font-bold text-white transition hover:bg-ink sm:text-lg"
               >
                 リハビリジムプライズネス公式サイトを見る
-              </a>
-              <ScrollLink href="#apply" variant="secondary">
+              </TrackedLink>
+              <ScrollLink href="#apply" variant="secondary" eventName="click_free_consultation">
                 日本語で相談する
               </ScrollLink>
             </div>
@@ -519,9 +524,21 @@ export default function Home() {
                   {plan.interval ? <span className="text-base font-bold text-ink/60">{plan.interval}</span> : null}
                 </p>
                 <p className="mt-4 grow leading-7 text-ink/70">{plan.description}</p>
-                <a href="#apply" className="mt-5 rounded-md bg-sea px-4 py-3 text-center font-bold text-white transition hover:bg-ink">
+                <TrackedLink
+                  href="#apply"
+                  eventName={
+                    plan.id === "initial-consultation"
+                      ? "click_plan_initial_79"
+                      : plan.id === "monthly-2"
+                        ? "click_plan_monthly_149"
+                        : plan.id === "monthly-4"
+                          ? "click_plan_monthly_279"
+                          : undefined
+                  }
+                  className="mt-5 rounded-md bg-sea px-4 py-3 text-center font-bold text-white transition hover:bg-ink"
+                >
                   このプランについて相談する
-                </a>
+                </TrackedLink>
               </div>
             );
           })}
@@ -586,7 +603,7 @@ export default function Home() {
             腰痛・膝痛・股関節痛・歩行不安に対する運動相談から、海外在住の親や家族の体力低下の不安まで、まずは無料お問い合わせで状況をお聞かせください。
           </p>
           <div className="mt-8">
-            <ScrollLink href="#apply">無料で相談する</ScrollLink>
+            <ScrollLink href="#apply" eventName="click_free_consultation">無料で相談する</ScrollLink>
           </div>
         </div>
       </section>

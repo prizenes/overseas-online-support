@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import { SiteAnalytics } from "@/components/SiteAnalytics";
 import "./globals.css";
+
+const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://overseas-online-support.vercel.app"),
@@ -12,7 +15,12 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true
-  }
+  },
+  verification: googleSiteVerification
+    ? {
+        google: googleSiteVerification
+      }
+    : undefined
 };
 
 export default function RootLayout({
@@ -22,7 +30,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body>{children}</body>
+      <body>
+        {children}
+        <SiteAnalytics />
+      </body>
     </html>
   );
 }
