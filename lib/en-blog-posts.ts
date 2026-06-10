@@ -17,7 +17,7 @@ export const enBlogPosts: EnBlogPost[] = [
     slug: "japanese-speaking-exercise-support",
     title: "Japanese-Speaking Exercise Support for People Living Abroad",
     description:
-      "Japanese-speaking exercise support for people living abroad who want to discuss low back pain, knee pain, walking concerns, and exercise continuation in Japanese.",
+      "Online exercise support in Japanese for people living abroad. A physical therapist from Japan helps Japanese speakers organize body concerns, exercise hesitation, and home exercise continuation.",
     date: "2026-06-09",
     keywords: [
       "Japanese-speaking exercise support",
@@ -26,24 +26,64 @@ export const enBlogPosts: EnBlogPost[] = [
     ],
     sections: [
       {
-        heading: "Why Japanese-speaking support matters abroad",
+        heading: "Japanese-Speaking Exercise Support for People Living Abroad",
         body: [
-          "Living abroad can make it difficult to talk about physical concerns in your first language. Even when local healthcare is available, explaining daily movement, exercise anxiety, family concerns, or past rehabilitation experience can feel stressful.",
-          "This service is designed for Japanese speakers living abroad who want to organize their concerns in Japanese before deciding what kind of exercise support may be appropriate."
+          "Living abroad can be exciting, but it can also become stressful when you have concerns about your body. You may feel low back pain after long hours at a desk, knee discomfort when walking up and down stairs, or uncertainty about whether it is safe to start exercising.",
+          "In these situations, it is often difficult to explain your concerns clearly in another language. For Japanese speakers living overseas, having a place to discuss body concerns in Japanese can provide reassurance.",
+          "Praiseness provides online exercise support in Japanese for people living abroad. This service is designed to help you organize your concerns, understand what kind of exercise may be appropriate, and continue safe home-based movement with guidance from a physical therapist in Japan."
+        ]
+      },
+      {
+        heading: "When Japanese Support May Be Helpful",
+        body: [
+          "This service may be helpful if you are unsure whether you should exercise because of low back pain or knee pain, have been told to exercise but do not know what to do at home, or want to organize local healthcare advice in Japanese.",
+          "It may also be useful if you feel uncomfortable explaining your body concerns in English or another local language, want to continue exercise after a temporary stay in Japan, or want your family member to join the online consultation.",
+          "The goal is not to replace local medical care. Instead, the goal is to help you organize your concerns in Japanese and consider safe, realistic ways to continue exercise in your daily life."
         ]
       },
       {
         heading: "What online exercise support can help organize",
         body: [
-          "A Japanese physical therapist listens to your situation, checks your daily environment, and reviews movement concerns through an online session. The goal is to support safer exercise continuation and self-care planning at home.",
-          "This is not a medical diagnosis or treatment. It does not replace local healthcare providers. Local doctors or physical therapists should be consulted when needed, especially when symptoms are severe or changing."
+          "Praiseness offers online exercise guidance for Japanese speakers living abroad who want support with low back pain-related exercise concerns, knee pain-related exercise concerns, hip discomfort, walking and balance concerns, fall prevention exercise, home exercise continuation, and family consultation in Japanese.",
+          "Online support is provided through conversation, movement observation, and exercise guidance. Because it is online, hands-on assessment, medical testing, and machine-based measurement cannot be performed.",
+          "This is not a medical diagnosis or treatment. It does not replace local doctors, physical therapists, emergency care, or medical services in your country of residence. Local doctors or physical therapists should be consulted when needed."
         ]
       },
       {
-        heading: "For Japanese people, families, and Japanese speakers overseas",
+        heading: "Why online exercise support in Japanese matters",
         body: [
-          "The support may be useful for people who feel unsure about exercise, families worried about an older parent living abroad, or Japanese speakers who want to continue exercise habits after local medical consultation.",
-          "Family members can join the conversation when helpful, and the first step is a free inquiry through the Japanese form."
+          "Exercise advice can sound simple but become difficult to apply in real life. Many people are told to strengthen their legs, stretch their hips, keep exercising, or stay active, but they are not always sure where to begin.",
+          "You may wonder which exercise to do first, how much is too much, whether discomfort means you should stop, or how to continue when you are busy. These questions are often easier to discuss in your native language.",
+          "Online exercise support in Japanese helps you review your current situation and consider a realistic plan that fits your home environment, schedule, and physical condition."
+        ]
+      },
+      {
+        heading: "About Praiseness",
+        body: [
+          "Praiseness is a rehabilitation-focused gym in Sapporo, Japan, operated by physical therapists. At our gym, we support people with concerns about low back pain, knee pain, hip discomfort, walking ability, fall prevention, and exercise continuation after medical rehabilitation.",
+          "For people living abroad, we provide online exercise support in Japanese based on the same approach we use in our gym: listening carefully, understanding the person's lifestyle, and helping them continue movement safely and realistically.",
+          "Online support does not include in-person physical examination or machine-based assessment. Instead, we focus on conversation, movement observation, and home exercise guidance."
+        ]
+      },
+      {
+        heading: "How online support works",
+        body: [
+          "The process starts with a free inquiry. After reviewing your concern, we coordinate the schedule and explain the next steps. The online session is held via Zoom, and exercise guidance or follow-up suggestions are provided when appropriate.",
+          "You do not need to decide everything before contacting us. If you are unsure whether this service is appropriate for you, you can start by telling us your current concern in Japanese."
+        ]
+      },
+      {
+        heading: "Pricing",
+        body: [
+          "The current reference prices are: initial online consultation 60 minutes for $79, single follow-up 45 minutes for $69, monthly support with 2 sessions for $149/month, monthly support with 4 sessions for $279/month, and video form check for $29.",
+          "Payment is made after inquiry and scheduling. We do not ask you to pay before confirming the basic details of your concern and appointment."
+        ]
+      },
+      {
+        heading: "Start with a free inquiry",
+        body: [
+          "If you are living abroad and want to discuss your body concerns in Japanese, please feel free to contact us. You can ask about low back pain, knee pain, walking concerns, home exercise, exercise hesitation, or how to continue movement after receiving advice locally.",
+          "We will review your inquiry and guide you through the next steps."
         ]
       }
     ]

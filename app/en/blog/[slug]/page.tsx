@@ -107,15 +107,20 @@ export default async function EnBlogPostPage({ params }: EnBlogPageProps) {
         <div className="mt-12 rounded-md bg-ink p-6 text-white">
           <h2 className="text-2xl font-bold">Free Inquiry in Japanese</h2>
           <p className="mt-4 leading-8 text-white/80">
-            If you are living abroad and want to discuss exercise concerns in Japanese, please start with the free inquiry form on the Japanese page.
+            If you are living abroad and want to discuss exercise concerns in Japanese, please start from the English support page or go directly to the Japanese free inquiry form.
           </p>
-          <TrackedLink
-            href="/#apply"
-            eventName="click_language_switch_ja"
-            className="mt-6 inline-flex rounded-md bg-sea px-6 py-3 font-bold text-white hover:bg-white hover:text-ink"
-          >
-            Go to the Japanese free inquiry form
-          </TrackedLink>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <Link href="/en" className="inline-flex rounded-md border border-white/40 px-6 py-3 font-bold text-white hover:bg-white hover:text-ink">
+              Go to the English support page
+            </Link>
+            <TrackedLink
+              href="/#apply"
+              eventName="click_language_switch_ja"
+              className="inline-flex rounded-md bg-sea px-6 py-3 font-bold text-white hover:bg-white hover:text-ink"
+            >
+              Go to the Japanese free inquiry form
+            </TrackedLink>
+          </div>
         </div>
       </article>
     </main>
