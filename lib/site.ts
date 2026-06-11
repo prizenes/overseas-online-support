@@ -5,8 +5,8 @@
 
 export const SITE_URL = "https://overseas-online-support.vercel.app";
 
-// 公式サイトURL(仮)。確定後にここだけ変更する。
-export const PRISENESS_OFFICIAL_URL = "https://priseness.com/";
+// リハビリジム プライズネス公式サイト
+export const PRISENESS_OFFICIAL_URL = "https://prizenes.com/";
 
 export const CONTACT_ANCHOR = "#consult"; // 無料相談フォームへのアンカー
 
@@ -42,34 +42,6 @@ export type Plan = {
   featured?: boolean;
 };
 
-// ---- ブログページ・JsonLdコンポーネント用エクスポート ----
-export const siteUrl = SITE_URL;
-
-export const organizationJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "HealthAndBeautyBusiness",
-  name: "リハビリジムプライズネス",
-  url: "https://prizenes.com/",
-  email: "mail@prizenes.com",
-  telephone: "011-600-6048",
-  image: "https://prizenes.com/common/upload_data/prizenescom/image/logo1.png",
-  address: {
-    "@type": "PostalAddress",
-    postalCode: "063-0812",
-    addressCountry: "JP",
-    addressRegion: "北海道",
-    addressLocality: "札幌市西区",
-    streetAddress: "琴似2条3-1-1 チェストオオイビル3階",
-  },
-  areaServed: ["Japan", "United States", "Canada", "Australia", "United Kingdom", "Europe", "Asia"],
-  availableLanguage: ["ja", "en"],
-};
-
-export function jsonLdScript(data: unknown) {
-  return { __html: JSON.stringify(data).replace(/</g, "\\u003c") };
-}
-
-// ---- 料金プラン(日英共通データ) ----
 export const PLANS: Plan[] = [
   {
     id: "initial",
