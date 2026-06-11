@@ -19,10 +19,14 @@ async function sendResendEmail({
   subject: string;
   text: string;
 }) {
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.RESEND_API_KEY?.trim();
 
   if (!apiKey) {
     return { sent: false };
+  }
+
+  if (!apiKey.startsWith("re_") || /[^\x20-\x7E]/.test(apiKey)) {
+    throw new Error("RESEND_API_KEY is invalid. Paste the actual Resend API key that starts with re_ and contains no Japanese text.");
   }
 
   const response = await fetch("https://api.resend.com/emails", {
