@@ -94,8 +94,8 @@ export default function Page() {
                 まず日本語で整理できる相談先を。
               </h1>
               <p className="lead">
-                腰痛・膝痛・歩行の不安、現地医療での説明後の運動継続、一時帰国後のフォローまで。
-                理学療法士が、日本語で身体の不安と運動の進め方を一緒に整理します。
+                腰痛・膝痛・歩行の不安、現地医療後の運動継続、一時帰国後のフォローまで。
+                理学療法士が、日本語で運動の進め方を一緒に整理します。
               </p>
               <div className="hero-ctas">
                 <TrackedLink
@@ -137,7 +137,7 @@ export default function Page() {
           <div className="container">
             <Reveal>
               <div className="section-head">
-                <span className="eyebrow">Worries</span>
+                <span className="eyebrow">お悩み</span>
                 <h2>海外で、こんなお悩みはありませんか？</h2>
                 <p className="lead">
                   ひとつでも当てはまれば、まず無料相談で状況をお聞かせください。
@@ -190,7 +190,7 @@ export default function Page() {
           <div className="container">
             <Reveal>
               <div className="section-head center">
-                <span className="eyebrow">Position</span>
+                <span className="eyebrow">私たちの立ち位置</span>
                 <h2>現地のサービスと迷っている方へ</h2>
               </div>
               <div style={{ maxWidth: 720, margin: "0 auto", textAlign: "center" }}>
@@ -214,7 +214,7 @@ export default function Page() {
           <div className="container">
             <Reveal>
               <div className="section-head">
-                <span className="eyebrow">Service</span>
+                <span className="eyebrow">サービス内容</span>
                 <h2>オンラインでできること</h2>
                 <p className="lead">
                   生活状況や動作を画面越しに確認し、無理なく続けられる運動を一緒に整理します。
@@ -264,7 +264,7 @@ export default function Page() {
           <div className="container">
             <Reveal>
               <div className="section-head">
-                <span className="eyebrow">Scope</span>
+                <span className="eyebrow">相談できること</span>
                 <h2>相談できること・できないことを明確にしています</h2>
               </div>
             </Reveal>
@@ -311,7 +311,7 @@ export default function Page() {
           <div className="container">
             <Reveal>
               <div className="section-head">
-                <span className="eyebrow">About Priseness</span>
+                <span className="eyebrow">プライズネスについて</span>
                 <h2>日本のリハビリジムで培った、身体を見る力をオンラインへ</h2>
               </div>
               <div style={{ maxWidth: 760 }}>
@@ -351,7 +351,7 @@ export default function Page() {
                   sizes="(max-width: 900px) 100vw, 320px"
                 />
                 <div>
-                  <span className="eyebrow">Therapist</span>
+                  <span className="eyebrow">担当セラピスト</span>
                   <h3 style={{ fontSize: "1.5rem" }}>栗谷川 豊</h3>
                   <dl>
                     <dt>資格</dt>
@@ -384,7 +384,7 @@ export default function Page() {
           <div className="container">
             <Reveal>
               <div className="section-head">
-                <span className="eyebrow">Plans</span>
+                <span className="eyebrow">料金の目安</span>
                 <h2>料金の目安</h2>
                 <p className="price-note">
                   料金は目安です。まずは無料相談で状況を伺い、内容が合いそうな場合にのみ、
@@ -393,28 +393,61 @@ export default function Page() {
                 </p>
               </div>
             </Reveal>
-            <Reveal>
-              <div className="price-grid">
-                {PLANS.map((p) => (
-                  <div className={`price-card ${p.featured ? "featured" : ""}`} key={p.id}>
-                    <h3>{p.ja}</h3>
-                    <div className="price">
-                      {p.price}
-                      {p.per && <small> / 月</small>}
+            {/* 入口となる初回相談を主役カードとして大きく表示 */}
+            {(() => {
+              const featured = PLANS.find((p) => p.featured)!;
+              const others = PLANS.filter((p) => !p.featured);
+              return (
+                <>
+                  <Reveal>
+                    <div className="price-hero">
+                      <div>
+                        <span className="price-hero-badge">まずはこの相談から</span>
+                        <h3>{featured.ja}</h3>
+                        <p>{featured.jaNote}</p>
+                        <p className="form-note" style={{ marginTop: 8 }}>
+                          ご利用は無料相談のあと。このページから直接決済に進むことはありません。
+                        </p>
+                      </div>
+                      <div className="price-hero-cta">
+                        <div className="price">{featured.price}</div>
+                        <TrackedLink
+                          href={CONTACT_ANCHOR}
+                          className="btn btn-primary"
+                          event={featured.event ?? EVENTS.clickFreeConsultation}
+                          eventParams={{ plan: featured.id }}
+                        >
+                          このプランについて相談する
+                        </TrackedLink>
+                      </div>
                     </div>
-                    <p>{p.jaNote}</p>
-                    <TrackedLink
-                      href={CONTACT_ANCHOR}
-                      className="btn btn-ghost"
-                      event={p.event ?? EVENTS.clickFreeConsultation}
-                      eventParams={{ plan: p.id }}
-                    >
-                      このプランについて相談する
-                    </TrackedLink>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
+                  </Reveal>
+                  <Reveal>
+                    <p className="price-sub-label">継続・補助プラン</p>
+                    <div className="price-grid sub">
+                      {others.map((p) => (
+                        <div className="price-card" key={p.id}>
+                          <h3>{p.ja}</h3>
+                          <div className="price">
+                            {p.price}
+                            {p.per && <small> / 月</small>}
+                          </div>
+                          <p>{p.jaNote}</p>
+                          <TrackedLink
+                            href={CONTACT_ANCHOR}
+                            className="btn btn-ghost"
+                            event={p.event ?? EVENTS.clickFreeConsultation}
+                            eventParams={{ plan: p.id }}
+                          >
+                            このプランについて相談する
+                          </TrackedLink>
+                        </div>
+                      ))}
+                    </div>
+                  </Reveal>
+                </>
+              );
+            })()}
           </div>
         </section>
 
@@ -423,7 +456,7 @@ export default function Page() {
           <div className="container">
             <Reveal>
               <div className="section-head center">
-                <span className="eyebrow">Flow</span>
+                <span className="eyebrow">ご利用の流れ</span>
                 <h2>ご利用の流れ</h2>
                 <p className="lead">お支払いのご案内は、日程調整のあと・必要な場合のみです。</p>
               </div>
@@ -493,7 +526,7 @@ export default function Page() {
           <div className="container">
             <Reveal>
               <div className="section-head center">
-                <span className="eyebrow">FAQ</span>
+                <span className="eyebrow">よくあるご質問</span>
                 <h2>よくあるご質問</h2>
               </div>
             </Reveal>
@@ -515,7 +548,7 @@ export default function Page() {
           <div className="container">
             <Reveal>
               <div className="section-head">
-                <span className="eyebrow">Free Consultation</span>
+                <span className="eyebrow">無料相談</span>
                 <h2>無料相談フォーム</h2>
                 <p className="lead">
                   現在のお悩みと希望日時をお聞かせください。内容を確認し、
