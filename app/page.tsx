@@ -5,23 +5,15 @@ import { JsonLd } from "@/components/JsonLd";
 import { Section } from "@/components/Section";
 import { TrackedLink } from "@/components/TrackedLink";
 import type { AnalyticsEventName } from "@/lib/analytics";
-import {
-  brandAssets,
-  concerns,
-  faqs,
-  plans,
-  safetyNotes,
-  serviceName,
-  targetUsers
-} from "@/lib/service-content";
-import { organizationJsonLd, siteUrl } from "@/lib/site";
+import { brandAssets, concerns, faqs, plans, safetyNotes, serviceName, targetUsers } from "@/lib/service-content";
+import { organizationJsonLd, prizenesOfficialUrl, siteUrl } from "@/lib/site";
 
 const pageTitle =
   "海外在住日本人のオンライン運動サポート｜腰痛・膝痛・歩行不安を日本語で理学療法士に相談";
 const pageDescription =
   "海外在住の日本人向けに、理学療法士が日本語でオンライン身体相談・運動サポートを行います。腰痛、膝痛、股関節痛、歩行不安、転倒不安、運動不足、病院リハビリ後の運動継続をサポート。まずは無料で相談できます。";
 
-const supportImages = {
+const images = {
   hero: {
     src: "/images/overseas-support/hero-online-consultation.png",
     alt: "海外在住日本人が日本語でオンライン身体相談を受ける様子"
@@ -41,15 +33,15 @@ const supportImages = {
   training: {
     src: "/images/overseas-support/online-training-at-home.png",
     alt: "自宅でオンライン運動指導を受ける男性"
+  },
+  therapist: {
+    src: "/images/overseas-support/therapist-kuriyagawa.jpg",
+    alt: "担当セラピスト栗谷川豊 理学療法士"
   }
 };
 
-const praisenessOfficialUrl = "https://prizenes.com/";
-
-const therapistProfile = {
+const therapist = {
   name: "栗谷川 豊",
-  photo: "/images/overseas-support/therapist-kuriyagawa.jpg",
-  photoAlt: "オンライン運動サポートを担当する栗谷川豊理学療法士",
   qualification: "理学療法士",
   experience: "理学療法士歴23年目",
   affiliation: "リハビリジムプライズネス",
@@ -62,65 +54,10 @@ const therapistProfile = {
   ]
 };
 
-export const metadata: Metadata = {
-  title: pageTitle,
-  description: pageDescription,
-  alternates: {
-    canonical: siteUrl,
-    languages: {
-      ja: siteUrl,
-      en: `${siteUrl}/en`,
-      "x-default": siteUrl
-    }
-  },
-  openGraph: {
-    title: pageTitle,
-    description: pageDescription,
-    url: siteUrl,
-    siteName: "リハビリジムプライズネス",
-    locale: "ja_JP",
-    type: "website",
-    images: [`${siteUrl}${supportImages.hero.src}`]
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitle,
-    description: pageDescription,
-    images: [`${siteUrl}${supportImages.hero.src}`]
-  }
-};
-
-function ScrollLink({
-  href,
-  children,
-  variant = "primary",
-  eventName
-}: {
-  href: string;
-  children: React.ReactNode;
-  variant?: "primary" | "secondary";
-  eventName?: AnalyticsEventName;
-}) {
-  const className =
-    variant === "primary"
-      ? "bg-sea text-white hover:bg-ink"
-      : "border border-sea bg-white text-sea hover:bg-mist";
-
-  return (
-    <TrackedLink
-      href={href}
-      eventName={eventName}
-      className={`${className} inline-flex min-h-12 items-center justify-center rounded-md px-6 py-3 text-base font-bold transition sm:text-lg`}
-    >
-      {children}
-    </TrackedLink>
-  );
-}
-
 const recommended = [
   "海外で腰や膝の不安を日本語で相談できる相手がいない",
   "歩行不安や転倒不安があり、運動を続けてよいか迷っている",
-  "海外在住の親や家族の体力低下が心配で、家族同席で相談したい",
+  "海外在住の親や家族の体力低下が心配",
   "病院リハビリ後に、自宅で続ける運動を整理したい",
   "一時帰国後も、海外で運動継続サポートを受けたい"
 ];
@@ -176,6 +113,61 @@ const inquiryFlow = [
   "継続サポートへ移行"
 ];
 
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: pageDescription,
+  alternates: {
+    canonical: siteUrl,
+    languages: {
+      ja: siteUrl,
+      en: `${siteUrl}/en`,
+      "x-default": siteUrl
+    }
+  },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: siteUrl,
+    siteName: "リハビリジムプライズネス",
+    locale: "ja_JP",
+    type: "website",
+    images: [`${siteUrl}${images.hero.src}`]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+    images: [`${siteUrl}${images.hero.src}`]
+  }
+};
+
+function ScrollLink({
+  href,
+  children,
+  variant = "primary",
+  eventName
+}: {
+  href: string;
+  children: React.ReactNode;
+  variant?: "primary" | "secondary";
+  eventName?: AnalyticsEventName;
+}) {
+  const className =
+    variant === "primary"
+      ? "bg-sea text-white hover:bg-ink"
+      : "border border-sea bg-white text-sea hover:bg-mist";
+
+  return (
+    <TrackedLink
+      href={href}
+      eventName={eventName}
+      className={`${className} inline-flex min-h-12 items-center justify-center rounded-md px-6 py-3 text-base font-bold transition sm:text-lg`}
+    >
+      {children}
+    </TrackedLink>
+  );
+}
+
 export default function Home() {
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -199,38 +191,35 @@ export default function Home() {
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div className="max-w-3xl">
             <div className="mb-6 flex items-center gap-4">
-              <img
-                src={brandAssets.logo}
-                alt="リハビリジムプライズネス"
-                className="h-12 w-auto object-contain"
-              />
+              <img src={brandAssets.logo} alt="リハビリジムプライズネス" className="h-12 w-auto object-contain" />
               <p className="text-sm font-bold text-sea">リハビリジムプライズネス</p>
             </div>
-            <h1 className="text-4xl font-black leading-tight text-ink sm:text-5xl lg:text-6xl">
-              {serviceName}
-            </h1>
+            <h1 className="text-4xl font-black leading-tight text-ink sm:text-5xl lg:text-6xl">{serviceName}</h1>
             <p className="mt-6 text-2xl font-bold leading-9 text-leaf">
               腰痛・膝痛・歩行不安を、日本語で理学療法士に相談。
             </p>
             <p className="mt-6 text-lg leading-8 text-ink/75 sm:text-xl sm:leading-9">
-              海外で身体の不安を感じたとき、日本語で相談できる場所があるだけでも安心につながります。膝や腰の不安、運動を始めるべきか迷っていることなど、まずは現在のお悩みをお聞かせください。
+              海外で身体の不安を感じたとき、日本語で相談できる場所があるだけでも安心につながります。
+              まずは現在のお悩みをお聞かせください。内容を確認したうえで、初回オンライン相談の対象となるか、日程やご利用の流れをご案内します。
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              {["日本語対応", "海外在住者向け", "Zoom対応", "家族同席可", "まずは無料相談"].map((label) => (
+              {["日本語対応", "海外在住者向け", "Zoom対応", "家族同席可能", "まずは無料相談"].map((label) => (
                 <span key={label} className="rounded-md bg-mist px-4 py-2 text-sm font-bold text-sea">
                   {label}
                 </span>
               ))}
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ScrollLink href="#apply" eventName="click_free_consultation">無料で相談する</ScrollLink>
+              <ScrollLink href="#apply" eventName="click_free_consultation">
+                無料で相談する
+              </ScrollLink>
               <ScrollLink href="#service" variant="secondary">
                 サービス内容を見る
               </ScrollLink>
             </div>
             <div className="mt-5">
               <TrackedLink href="/en" eventName="click_language_switch_en" className="text-sm font-bold text-sea underline underline-offset-4">
-                英語補助ページ
+                English support page
               </TrackedLink>
             </div>
           </div>
@@ -238,8 +227,8 @@ export default function Home() {
           <div className="relative">
             <div className="relative overflow-hidden rounded-md bg-white shadow-soft">
               <Image
-                src={supportImages.hero.src}
-                alt={supportImages.hero.alt}
+                src={images.hero.src}
+                alt={images.hero.alt}
                 width={1600}
                 height={900}
                 priority
@@ -249,9 +238,9 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-r from-white/35 via-white/5 to-transparent" />
             </div>
             <div className="relative -mt-10 ml-auto mr-4 max-w-xs rounded-md bg-white p-5 shadow-soft">
-              <p className="text-sm font-black text-coral">まずは無料相談</p>
+              <p className="text-sm font-black text-coral">まずは初回相談</p>
               <p className="mt-2 text-4xl font-black text-ink">$79</p>
-              <p className="mt-1 text-base font-bold leading-6 text-ink">オンライン身体相談</p>
+              <p className="mt-1 text-base font-bold leading-6 text-ink">オンライン身体相談 60分</p>
             </div>
           </div>
         </div>
@@ -262,15 +251,13 @@ export default function Home() {
           <div>
             <h2 className="text-3xl font-black leading-tight">まずは無料でご相談ください</h2>
             <p className="mt-4 text-lg leading-8 text-white/80">
-              海外で身体の不安を感じたとき、日本語で相談できる場所があるだけでも安心につながります。
               膝や腰の不安、運動を始めるべきか迷っていること、現地での説明がわかりにくいことなど、まずは現在のお悩みをお聞かせください。
-            </p>
-            <p className="mt-3 text-lg leading-8 text-white/80">
-              初回オンライン相談をご希望の場合は、内容を確認したうえで、日程調整やご利用の流れをご案内します。
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-            <ScrollLink href="#apply" eventName="click_free_consultation">無料で相談する</ScrollLink>
+            <ScrollLink href="#apply" eventName="click_free_consultation">
+              無料で相談する
+            </ScrollLink>
           </div>
         </div>
       </section>
@@ -278,8 +265,8 @@ export default function Home() {
       <Section title="こんな方におすすめ" tone="white">
         <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <Image
-            src={supportImages.family.src}
-            alt={supportImages.family.alt}
+            src={images.family.src}
+            alt={images.family.alt}
             width={1600}
             height={900}
             sizes="(min-width: 1024px) 40vw, 100vw"
@@ -293,16 +280,13 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className="mt-8">
-          <ScrollLink href="#apply" eventName="click_free_consultation">無料で相談する</ScrollLink>
-        </div>
       </Section>
 
       <Section title="海外でこんなお悩みはありませんか？" tone="paper">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <Image
-            src={supportImages.worries.src}
-            alt={supportImages.worries.alt}
+            src={images.worries.src}
+            alt={images.worries.alt}
             width={1600}
             height={900}
             sizes="(min-width: 1024px) 44vw, 100vw"
@@ -335,52 +319,46 @@ export default function Home() {
             ))}
           </div>
           <Image
-            src={supportImages.training.src}
-            alt={supportImages.training.alt}
+            src={images.training.src}
+            alt={images.training.alt}
             width={1600}
             height={900}
             sizes="(min-width: 1024px) 44vw, 100vw"
             className="aspect-[4/3] rounded-md object-cover shadow-soft"
           />
         </div>
-        <div className="mt-8">
-          <ScrollLink href="#apply" eventName="click_free_consultation">無料で相談する</ScrollLink>
-        </div>
       </Section>
 
-      <Section title="自宅で続けやすい運動を、画面越しに確認します" tone="white">
+      <Section title="相談できる内容・相談できない内容" tone="white">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <Image
-            src={supportImages.chair.src}
-            alt={supportImages.chair.alt}
+            src={images.chair.src}
+            alt={images.chair.alt}
             width={1600}
             height={900}
             sizes="(min-width: 1024px) 42vw, 100vw"
             className="aspect-[16/11] rounded-md object-cover shadow-soft"
           />
-          <div>
-            <h3 className="text-2xl font-black leading-tight text-ink">相談できる内容・相談できない内容を明確にしています</h3>
-            <div className="mt-6 grid gap-6 md:grid-cols-2">
-              <div className="rounded-md bg-mist p-6">
-                <h4 className="text-xl font-bold">相談できる内容</h4>
-                <ul className="mt-5 grid gap-3">
-                  {canConsult.map((item) => (
-                    <li key={item} className="text-base font-semibold leading-7">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="rounded-md border border-coral/30 bg-coral/5 p-6">
-                <h4 className="text-xl font-bold">相談できない内容</h4>
-                <ul className="mt-5 grid gap-3">
-                  {cannotConsult.map((item) => (
-                    <li key={item} className="text-base font-semibold leading-7">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-md bg-mist p-6">
+              <h3 className="text-xl font-bold">相談できる内容</h3>
+              <ul className="mt-5 grid gap-3">
+                {canConsult.map((item) => (
+                  <li key={item} className="text-base font-semibold leading-7">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-md border border-coral/30 bg-coral/5 p-6">
+              <h3 className="text-xl font-bold">相談できない内容</h3>
+              <ul className="mt-5 grid gap-3">
+                {cannotConsult.map((item) => (
+                  <li key={item} className="text-base font-semibold leading-7">
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -406,7 +384,7 @@ export default function Home() {
             </div>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <TrackedLink
-                href={praisenessOfficialUrl}
+                href={prizenesOfficialUrl}
                 eventName="click_priseness_official_site"
                 target="_blank"
                 rel="noreferrer"
@@ -422,37 +400,40 @@ export default function Home() {
 
           <aside className="rounded-md border border-sea/15 bg-white p-5 shadow-soft sm:p-6">
             <div className="flex flex-col gap-5 sm:flex-row lg:flex-col">
-              <img
-                src={therapistProfile.photo}
-                alt={therapistProfile.photoAlt}
+              <Image
+                src={images.therapist.src}
+                alt={images.therapist.alt}
+                width={1200}
+                height={1200}
+                sizes="(min-width: 1024px) 34vw, 100vw"
                 className="aspect-[4/3] w-full rounded-md object-cover sm:w-48 lg:w-full"
               />
               <div>
                 <p className="text-sm font-black text-sea">セラピスト紹介</p>
-                <h3 className="mt-2 text-2xl font-black leading-tight text-ink">{therapistProfile.name}</h3>
+                <h3 className="mt-2 text-2xl font-black leading-tight text-ink">{therapist.name}</h3>
                 <dl className="mt-4 grid gap-2 text-base leading-7">
                   <div>
                     <dt className="font-bold text-ink">資格</dt>
-                    <dd className="text-ink/75">{therapistProfile.qualification}</dd>
+                    <dd className="text-ink/75">{therapist.qualification}</dd>
                   </div>
                   <div>
                     <dt className="font-bold text-ink">経験</dt>
-                    <dd className="text-ink/75">{therapistProfile.experience}</dd>
+                    <dd className="text-ink/75">{therapist.experience}</dd>
                   </div>
                   <div>
                     <dt className="font-bold text-ink">所属</dt>
-                    <dd className="text-ink/75">{therapistProfile.affiliation}</dd>
+                    <dd className="text-ink/75">{therapist.affiliation}</dd>
                   </div>
                 </dl>
               </div>
             </div>
             <p className="mt-5 leading-7 text-ink/75">
-              担当する理学療法士が、身体の状態や生活背景を丁寧に確認し、無理なく続けられる運動を一緒に考えます。オンラインでは、触診や機器測定は行えませんが、問診・動作確認・生活状況の確認を通じて、現在の不安を整理し、自宅でできる運動の方向性を提案します。
+              担当する理学療法士が、身体の状態や生活背景を丁寧に確認し、無理なく続けられる運動を一緒に考えます。オンラインでは触診や機器測定は行えませんが、問診・動作確認・生活状況の確認を通じて、現在の不安を整理します。
             </p>
             <div className="mt-5">
               <p className="text-sm font-black text-ink">専門・対応領域</p>
               <ul className="mt-3 grid gap-2">
-                {therapistProfile.specialties.map((specialty) => (
+                {therapist.specialties.map((specialty) => (
                   <li key={specialty} className="rounded-md bg-mist px-4 py-3 text-sm font-bold leading-6 text-sea">
                     {specialty}
                   </li>
@@ -467,23 +448,13 @@ export default function Home() {
             <div>
               <h3 className="text-xl font-black leading-tight text-ink">実店舗がある安心感を、オンライン相談にも</h3>
               <p className="mt-3 leading-7 text-ink/75">
-                オンラインでは店舗の器具を使用するわけではありません。実店舗で培った評価・運動指導の考え方をもとに、海外のご自宅で続けやすい方法を一緒に整理します。
+                オンラインでは店舗の器具を使用するわけではありません。店舗で培った評価・運動指導の考え方をもとに、海外のご自宅で続けやすい方法を一緒に整理します。
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-3">
-              {brandAssets.facility.map((image, index) => (
+              {brandAssets.facility.map((image) => (
                 <figure key={image.src} className="overflow-hidden rounded-md bg-paper">
-                  <img
-                    src={image.src}
-                    alt={
-                      index === 0
-                        ? "リハビリジムプライズネスの実店舗トレーニングルーム"
-                        : index === 1
-                          ? "リハビリジムプライズネスの運動サポート環境"
-                          : "リハビリジムプライズネスで身体の状態を確認する様子"
-                    }
-                    className="aspect-[4/3] w-full object-cover"
-                  />
+                  <img src={image.src} alt={image.alt} className="aspect-[4/3] w-full object-cover" />
                 </figure>
               ))}
             </div>
@@ -504,7 +475,7 @@ export default function Home() {
       <Section
         id="plans"
         title="料金プラン"
-        description="料金は目安です。まずは無料相談で内容を確認し、初回オンライン相談や継続サポートが合いそうな場合に、ご利用の流れを個別にご案内します。"
+        description="料金は目安です。まずは無料相談で内容を確認し、初回相談や継続サポートが合いそうな場合に、ご利用の流れを個別にご案内します。"
         tone="mist"
       >
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
@@ -513,9 +484,7 @@ export default function Home() {
             return (
               <div
                 key={plan.id}
-                className={`flex flex-col rounded-md bg-white p-6 shadow-sm ${
-                  featured ? "xl:col-span-2 ring-4 ring-coral/30" : ""
-                }`}
+                className={`flex flex-col rounded-md bg-white p-6 shadow-sm ${featured ? "xl:col-span-2 ring-4 ring-coral/30" : ""}`}
               >
                 {featured ? <p className="mb-3 text-sm font-black text-coral">まずはこちら</p> : null}
                 <h3 className="text-xl font-bold leading-7">{plan.name}</h3>
@@ -588,7 +557,7 @@ export default function Home() {
         id="apply"
         eyebrow="無料相談"
         title="無料相談フォーム"
-        description="現在のお悩みや希望日時をお聞かせください。内容を確認し、初回オンライン相談の対象となるか、日程調整やご利用の流れをメールでご案内します。"
+        description="現在のお悩みと希望日時をお聞かせください。内容を確認し、初回オンライン相談の対象となるか、日程調整やご利用の流れをメールでご案内します。"
         tone="paper"
       >
         <ApplyForm />
@@ -603,7 +572,9 @@ export default function Home() {
             腰痛・膝痛・股関節痛・歩行不安に対する運動相談から、海外在住の親や家族の体力低下の不安まで、まずは無料お問い合わせで状況をお聞かせください。
           </p>
           <div className="mt-8">
-            <ScrollLink href="#apply" eventName="click_free_consultation">無料で相談する</ScrollLink>
+            <ScrollLink href="#apply" eventName="click_free_consultation">
+              無料で相談する
+            </ScrollLink>
           </div>
         </div>
       </section>

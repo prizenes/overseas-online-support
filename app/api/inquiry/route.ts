@@ -60,7 +60,7 @@ function buildAdminText(payload: NormalizedInquiryPayload) {
     `お名前: ${payload.name}`,
     `メールアドレス: ${payload.email}`,
     `居住国: ${payload.country}`,
-    `居住地のタイムゾーン: ${payload.timezone}`,
+    `利用者のタイムゾーン: ${payload.timezone}`,
     `相談したい内容: ${payload.topics.join(", ")}`,
     `本人/家族: ${payload.consultationFor}`,
     `希望する連絡方法: ${payload.contactPreference}`,
@@ -75,7 +75,7 @@ function buildAdminText(payload: NormalizedInquiryPayload) {
     "1. 相談可否を確認",
     "2. 日程調整",
     "3. 必要に応じて事前確認フォームを案内",
-    "4. Stripe決済リンクを送付"
+    "4. ご利用方法と支払い方法を個別に案内"
   ].join("\n");
 }
 
@@ -83,7 +83,7 @@ function buildUserText(name: string, slots: NormalizedInquiryPayload["preferredS
   return `${name} 様
 
 お問い合わせありがとうございます。
-内容を確認のうえ、初回オンライン相談の対象となるか、日程調整やお支払い方法についてメールでご案内いたします。
+内容を確認のうえ、初回オンライン相談の対象となるか、日程調整やご利用の流れについてメールでご案内いたします。
 
 送信いただいた希望日時:
 ${formatPreferredSlots(slots)}

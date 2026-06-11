@@ -136,9 +136,9 @@ export function ApplyForm() {
   if (state === "success") {
     return (
       <div className="rounded-md bg-white p-6 shadow-soft sm:p-8">
-        <p className="text-2xl font-black leading-9 text-ink">無料相談を送信しました。</p>
+        <p className="text-2xl font-black leading-9 text-ink">無料相談を送信しました</p>
         <p className="mt-4 text-lg leading-8 text-ink/75">
-          内容を確認のうえ、初回オンライン相談の対象となるか、日程調整やご利用の流れについてメールでご案内いたします。
+          お問い合わせありがとうございます。内容を確認のうえ、初回オンライン相談の対象となるか、日程調整やご利用の流れについてメールでご案内いたします。
         </p>
         <button
           type="button"
@@ -155,7 +155,7 @@ export function ApplyForm() {
     <form onSubmit={handleSubmit} className="grid gap-6 rounded-md bg-white p-5 shadow-soft sm:p-8">
       <div className="rounded-md bg-mist p-4">
         <p className="text-lg font-bold leading-8 text-ink">
-          現在のお悩みや希望日時をお聞かせください。内容を確認し、初回オンライン相談の対象となるか、日程調整やご利用の流れをメールでご案内します。
+          現在のお悩みと希望日時をお聞かせください。内容を確認し、初回オンライン相談の対象となるか、日程調整やご利用の流れをメールでご案内します。
         </p>
       </div>
 

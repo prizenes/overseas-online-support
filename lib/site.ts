@@ -1,13 +1,15 @@
 export const siteUrl = "https://overseas-online-support.vercel.app";
 
+export const prizenesOfficialUrl = "https://prizenes.com/";
+
 export const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "HealthAndBeautyBusiness",
   name: "リハビリジムプライズネス",
-  url: "https://prizenes.com/",
+  url: prizenesOfficialUrl,
   email: "mail@prizenes.com",
   telephone: "011-600-6048",
-  image: "https://prizenes.com/common/upload_data/prizenescom/image/20221202101242.jpg",
+  image: "https://prizenes.com/common/upload_data/prizenescom/image/logo1.png",
   address: {
     "@type": "PostalAddress",
     postalCode: "063-0812",
