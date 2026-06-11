@@ -3,6 +3,7 @@ import TrackedLink from "@/components/TrackedLink";
 import JstClock from "@/components/JstClock";
 import Reveal from "@/components/Reveal";
 import { EVENTS, PLANS, PRISENESS_OFFICIAL_URL } from "@/lib/site";
+import { BLOG_POSTS, BLOG_PATH } from "@/lib/blog";
 
 const JA_FORM = "/#consult";
 
@@ -60,6 +61,9 @@ export default function EnPage() {
             <small>Online Exercise Support in Japanese</small>
           </a>
           <nav className="header-actions">
+            <a href={BLOG_PATH} className="lang-switch">
+              Blog
+            </a>
             <TrackedLink href="/" className="lang-switch" event={EVENTS.clickLanguageSwitchJa}>
               日本語
             </TrackedLink>
@@ -336,6 +340,43 @@ export default function EnPage() {
           </div>
         </section>
 
+        {/* ===== From the blog ===== */}
+        <section className="section">
+          <div className="container">
+            <Reveal>
+              <div className="section-head">
+                <span className="eyebrow">From the blog</span>
+                <h2>Guides on exercise support in Japanese</h2>
+                <p className="lead">
+                  Articles in English for Japanese speakers abroad — searchable, shareable,
+                  and written around real situations.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal>
+              <div className="from-blog">
+                {BLOG_POSTS.slice(0, 3).map((p) => (
+                  <article className="blog-card" key={p.slug}>
+                    <span className="blog-cat" style={{ alignSelf: "flex-start" }}>
+                      {p.category}
+                    </span>
+                    <h3 style={{ fontSize: "1.02rem", lineHeight: 1.65, margin: 0 }}>
+                      <a href={`${BLOG_PATH}/${p.slug}`} style={{ textDecoration: "none" }}>
+                        {p.title}
+                      </a>
+                    </h3>
+                  </article>
+                ))}
+              </div>
+              <p style={{ marginTop: 22 }}>
+                <a className="blog-more" href={BLOG_PATH}>
+                  View all articles →
+                </a>
+              </p>
+            </Reveal>
+          </div>
+        </section>
+
         {/* ===== FAQ ===== */}
         <section className="section alt" id="faq">
           <div className="container">
@@ -390,6 +431,7 @@ export default function EnPage() {
             Online exercise support in Japanese, from Sapporo, Japan
           </div>
           <div style={{ display: "flex", gap: 18 }}>
+            <a href={BLOG_PATH}>English Blog</a>
             <TrackedLink
               href={PRISENESS_OFFICIAL_URL}
               target="_blank"

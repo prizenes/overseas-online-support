@@ -361,6 +361,48 @@ p { margin: 0 0 1em; }
 .site-footer { border-top: 1px solid var(--line); padding: 44px 0 56px; font-size: 0.85rem; color: var(--ink-soft); }
 .site-footer .inner { display: flex; flex-wrap: wrap; gap: 18px; justify-content: space-between; align-items: center; }
 
+
+/* ---------- blog ---------- */
+.blog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.blog-card {
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius-sm);
+  padding: 28px 26px; display: flex; flex-direction: column; gap: 10px;
+}
+.blog-card h2 { font-size: 1.12rem; line-height: 1.65; margin: 0; }
+.blog-card h2 a { text-decoration: none; }
+.blog-card h2 a:hover { color: var(--green-700); text-decoration: underline; }
+.blog-card p { font-size: 0.9rem; color: var(--ink-soft); margin: 0; flex: 1; }
+.blog-card-meta { display: flex; align-items: center; gap: 12px; font-size: 0.78rem; color: var(--ink-soft); }
+.blog-cat {
+  background: var(--green-050); color: var(--green-700);
+  border-radius: 999px; padding: 3px 12px; letter-spacing: 0.04em;
+}
+.blog-more { font-size: 0.88rem; color: var(--green-700); text-decoration: none; }
+.blog-more:hover { text-decoration: underline; }
+
+/* article */
+.article-body { max-width: 720px; }
+.article-body h1 { font-size: clamp(1.5rem, 3.4vw, 2.05rem); margin-bottom: 22px; }
+.article-body h2 { font-size: 1.25rem; margin: 44px 0 14px; }
+.article-body p { font-size: 1rem; line-height: 2; }
+.breadcrumbs { font-size: 0.8rem; color: var(--ink-soft); margin-bottom: 18px; }
+.breadcrumbs a { color: inherit; }
+.article-cta {
+  background: var(--green-050); border-radius: var(--radius);
+  padding: 34px 36px; text-align: center; margin-top: 40px;
+}
+.related { margin-top: 44px; border-top: 1px solid var(--line); padding-top: 22px; }
+.related ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.related a { color: var(--green-700); font-size: 0.95rem; }
+
+/* en page: from the blog */
+.from-blog { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+
+@media (max-width: 900px) {
+  .blog-grid, .from-blog { grid-template-columns: 1fr; }
+  .article-cta { padding: 26px 22px; }
+}
+
 /* reveal on scroll */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.in { opacity: 1; transform: none; }

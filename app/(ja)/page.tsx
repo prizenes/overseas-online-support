@@ -626,6 +626,7 @@ export default function Page() {
             <TrackedLink href="/en" event={EVENTS.clickLanguageSwitchEn}>
               English
             </TrackedLink>
+            <a href="/en/blog">English Blog</a>
           </div>
         </div>
       </footer>

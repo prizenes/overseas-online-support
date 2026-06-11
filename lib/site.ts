@@ -69,7 +69,6 @@ export function jsonLdScript(data: unknown) {
   return { __html: JSON.stringify(data).replace(/</g, "\\u003c") };
 }
 
-// ---- 料金プラン(日英共通データ) ----
 export const PLANS: Plan[] = [
   {
     id: "initial",
