@@ -4,6 +4,7 @@
 // =============================================================
 
 export const SITE_URL = "https://overseas-online-support.vercel.app";
+export const siteUrl = SITE_URL;
 
 // リハビリジム プライズネス公式サイト
 export const PRISENESS_OFFICIAL_URL = "https://prizenes.com/";
@@ -21,7 +22,7 @@ export const EVENTS = {
   submitContactForm: "submit_contact_form",
   clickPlanInitial79: "click_plan_initial_79",
   clickPlanMonthly149: "click_plan_monthly_149",
-  clickMonthly279: "click_monthly_279",
+  clickMonthly279: "click_plan_monthly_279",
   clickPrisenessOfficialSite: "click_priseness_official_site",
   clickLanguageSwitchEn: "click_language_switch_en",
   clickLanguageSwitchJa: "click_language_switch_ja",
@@ -43,7 +44,6 @@ export type Plan = {
 };
 
 // ---- ブログページ・JsonLdコンポーネント用エクスポート ----
-export const siteUrl = SITE_URL;
 
 export const organizationJsonLd = {
   "@context": "https://schema.org",

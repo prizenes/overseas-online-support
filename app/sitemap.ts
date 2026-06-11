@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
+import { blogPosts } from "@/lib/blog-posts";
 import { SITE_URL } from "@/lib/site";
 import { BLOG_POSTS, BLOG_PATH } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-  return [
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: `${SITE_URL}/`,
       lastModified,
@@ -24,16 +25,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     {
+      url: `${SITE_URL}/blog`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
       url: `${SITE_URL}${BLOG_PATH}`,
       lastModified,
       changeFrequency: "weekly",
       priority: 0.7,
     },
-    ...BLOG_POSTS.map((p) => ({
-      url: `${SITE_URL}${BLOG_PATH}/${p.slug}`,
-      lastModified: new Date(`${p.date}T00:00:00Z`),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    })),
+  ];
+
+  const jaBlogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${SITE_URL}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  const enBlogPages: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
+    url: `${SITE_URL}${BLOG_PATH}/${post.slug}`,
+    lastModified: new Date(`${post.date}T00:00:00Z`),
+    changeFrequency: "monthly",
+    priority: 0.65,
+  }));
+
+  return [
+    ...staticPages,
+    ...jaBlogPages,
+    ...enBlogPages,
   ];
 }
