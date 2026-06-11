@@ -164,7 +164,8 @@ export async function POST(request: Request) {
       adminEmail,
       emailStatus
     });
-  } catch {
+  } catch (error) {
+    console.error("Inquiry email delivery failed", error);
     return NextResponse.json(
       {
         error: "メール送信に失敗しました。時間をおいて再度お試しください。",

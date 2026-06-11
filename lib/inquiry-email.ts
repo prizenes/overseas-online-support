@@ -40,7 +40,8 @@ async function sendResendEmail({
   });
 
   if (!response.ok) {
-    throw new Error("Email provider request failed.");
+    const errorText = await response.text();
+    throw new Error(`Email provider request failed. status=${response.status} body=${errorText.slice(0, 500)}`);
   }
 
   return { sent: true };
