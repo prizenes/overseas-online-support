@@ -148,19 +148,33 @@ export async function POST(request: Request) {
       userText: buildUserText(payload.name, payload.preferredSlots)
     });
 
+    if (!emailStatus.adminEmailSent) {
+      return NextResponse.json(
+        {
+          error: "メール送信設定が未完了のため送信できませんでした。管理者にお問い合わせください。",
+          adminEmail,
+          emailStatus
+        },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json({
       ok: true,
       adminEmail,
       emailStatus
     });
   } catch {
-    return NextResponse.json({
-      ok: true,
-      adminEmail,
-      emailStatus: {
-        adminEmailSent: false,
-        userEmailSent: false
-      }
-    });
+    return NextResponse.json(
+      {
+        error: "メール送信に失敗しました。時間をおいて再度お試しください。",
+        adminEmail,
+        emailStatus: {
+          adminEmailSent: false,
+          userEmailSent: false
+        }
+      },
+      { status: 500 }
+    );
   }
 }

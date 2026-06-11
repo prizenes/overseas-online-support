@@ -138,7 +138,7 @@ export function ApplyForm() {
       <div className="rounded-md bg-white p-6 shadow-soft sm:p-8">
         <p className="text-2xl font-black leading-9 text-ink">無料相談を送信しました</p>
         <p className="mt-4 text-lg leading-8 text-ink/75">
-          お問い合わせありがとうございます。内容を確認のうえ、初回オンライン相談の対象となるか、日程調整やご利用の流れについてメールでご案内いたします。
+          お問い合わせありがとうございます。送信内容は mail@prizenes.com に通知されました。内容を確認のうえ、初回オンライン相談の対象となるか、日程調整やご利用の流れについてメールでご案内いたします。
         </p>
         <button
           type="button"
