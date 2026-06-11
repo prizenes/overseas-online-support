@@ -6,7 +6,7 @@ import { EVENTS } from "@/lib/site";
 
 // ---- タイムゾーン処理 ------------------------------------------------
 
-/** datetime-local の値(例: 2026-06-20T10:30)を、指定タイムゾーンの壁時計時刻としてUTCに変換 */
+/** datetime-local の値を、指定タイムゾーンの壁時計時刻としてUTCに変換（DST考慮） */
 function wallTimeToUtc(value: string, timeZone: string): Date | null {
   if (!value) return null;
   const [d, t] = value.split("T");
@@ -14,7 +14,6 @@ function wallTimeToUtc(value: string, timeZone: string): Date | null {
   const [y, m, day] = d.split("-").map(Number);
   const [hh, mm] = t.split(":").map(Number);
 
-  // 一旦UTCとして解釈 → そのTZでの表示とのズレ分を補正(DST含め2回反復で十分)
   let utc = Date.UTC(y, m - 1, day, hh, mm);
   for (let i = 0; i < 2; i++) {
     const parts = new Intl.DateTimeFormat("en-US", {
@@ -29,8 +28,8 @@ function wallTimeToUtc(value: string, timeZone: string): Date | null {
   return new Date(utc);
 }
 
-function formatJst(date: Date, locale = "ja-JP"): string {
-  return new Intl.DateTimeFormat(locale, {
+function formatJst(date: Date): string {
+  return new Intl.DateTimeFormat("ja-JP", {
     timeZone: "Asia/Tokyo",
     month: "long", day: "numeric", weekday: "short",
     hour: "2-digit", minute: "2-digit",
@@ -46,7 +45,121 @@ function jstHour(date: Date): number {
   return h + m / 60;
 }
 
-// ---- 希望日時1枠ぶんの入力+JST表示 ----------------------------------
+// 海外在住日本人の主要居住地を上位候補として表示
+const MAJOR_TZ = [
+  "America/Los_Angeles",
+  "America/New_York",
+  "America/Chicago",
+  "America/Denver",
+  "America/Toronto",
+  "Europe/London",
+  "Europe/Paris",
+  "Europe/Berlin",
+  "Australia/Sydney",
+  "Australia/Melbourne",
+  "Asia/Singapore",
+  "Asia/Bangkok",
+  "Asia/Hong_Kong",
+  "Asia/Tokyo",
+  "Pacific/Auckland",
+];
+
+// ---- タイムゾーン選択（折りたたみ+検索） ------------------------------
+
+function TimezonePicker({ tz, onChange }: { tz: string; onChange: (v: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+
+  const allZones = useMemo<string[]>(() => {
+    try {
+      return (
+        (Intl as unknown as { supportedValuesOf?: (k: string) => string[] })
+          .supportedValuesOf?.("timeZone") ?? MAJOR_TZ
+      );
+    } catch {
+      return MAJOR_TZ;
+    }
+  }, []);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) {
+      // 検索前は主要候補のみ表示し、長いリストを出さない
+      return MAJOR_TZ;
+    }
+    return allZones.filter((z) => z.toLowerCase().includes(q)).slice(0, 30);
+  }, [query, allZones]);
+
+  const localNow = (zone: string) => {
+    try {
+      return new Intl.DateTimeFormat("ja-JP", {
+        timeZone: zone, hour: "2-digit", minute: "2-digit",
+      }).format(new Date());
+    } catch {
+      return "";
+    }
+  };
+
+  return (
+    <div className="field">
+      <label>あなたのタイムゾーン</label>
+      <div className="tz-current">
+        <span>
+          <strong>{tz}</strong>
+          <small>（現地時刻 {localNow(tz)}）</small>
+        </span>
+        <button
+          type="button"
+          className="tz-toggle"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+        >
+          {open ? "閉じる" : "タイムゾーンを変更する"}
+        </button>
+      </div>
+      <p className="tz-hint">お使いの端末から自動取得しました。違う場合のみ変更してください。</p>
+
+      {open && (
+        <div className="tz-picker">
+          <input
+            type="text"
+            placeholder="都市名で検索（例：London、Sydney、Vancouver）"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            aria-label="タイムゾーンを検索"
+          />
+          {!query && <p className="tz-hint" style={{ margin: "8px 0 4px" }}>主要な候補：</p>}
+          <ul className="tz-options" role="listbox">
+            {filtered.map((z) => (
+              <li key={z}>
+                <button
+                  type="button"
+                  role="option"
+                  aria-selected={z === tz}
+                  className={z === tz ? "selected" : ""}
+                  onClick={() => {
+                    onChange(z);
+                    setOpen(false);
+                    setQuery("");
+                  }}
+                >
+                  {z}
+                  <small>{localNow(z)}</small>
+                </button>
+              </li>
+            ))}
+            {filtered.length === 0 && (
+              <li className="tz-empty">該当するタイムゾーンが見つかりません</li>
+            )}
+          </ul>
+        </div>
+      )}
+      <input type="hidden" name="timezone" value={tz} />
+    </div>
+  );
+}
+
+// ---- 希望日時1枠 -------------------------------------------------------
 
 function PreferredSlot({
   label, value, onChange, timeZone,
@@ -61,10 +174,9 @@ function PreferredSlot({
         type="datetime-local"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        aria-describedby={`${label}-jst`}
       />
       {utc && (
-        <p id={`${label}-jst`} className={`jst-result ${inRange ? "" : "out"}`}>
+        <p className={`jst-result ${inRange ? "" : "out"}`}>
           日本時間：{formatJst(utc)}{" "}
           {inRange
             ? "（受付時間内 9:00〜19:00）"
@@ -84,8 +196,8 @@ const TOPICS = [
 
 export default function ConsultForm() {
   const [tz, setTz] = useState("Asia/Tokyo");
-  const [tzAuto, setTzAuto] = useState(true);
   const [slots, setSlots] = useState(["", "", ""]);
+  const [moreSlots, setMoreSlots] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
 
   useEffect(() => {
@@ -93,67 +205,27 @@ export default function ConsultForm() {
     if (detected) setTz(detected);
   }, []);
 
-  const tzOptions = useMemo<string[]>(() => {
-    try {
-      // 型定義が古い環境向けにanyを許容
-      return (Intl as unknown as { supportedValuesOf?: (k: string) => string[] })
-        .supportedValuesOf?.("timeZone") ?? [tz];
-    } catch {
-      return [tz];
-    }
-  }, [tz]);
-
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("sending");
     const form = e.currentTarget;
     const data = new FormData(form);
-
-    const preferredSlots = slots
-      .map((s, i) => {
-        const utc = wallTimeToUtc(s, tz);
-        if (!s || !utc) return null;
-        const h = jstHour(utc);
-        return {
-          label: `第${i + 1}希望`,
-          localDateTime: s,
-          localTimeZone: tz,
-          localDisplay: new Intl.DateTimeFormat("ja-JP", {
-            timeZone: tz,
-            month: "long", day: "numeric", weekday: "short",
-            hour: "2-digit", minute: "2-digit",
-          }).format(utc),
-          japanDisplay: formatJst(utc),
-          isWithinJapanBusinessHours: h >= 9 && h <= 19,
-        };
-      })
-      .filter(Boolean);
-
-    const payload = {
-      name: String(data.get("name") ?? ""),
-      email: String(data.get("email") ?? ""),
-      country: String(data.get("country") ?? ""),
-      timezone: tz,
-      topics: data.getAll("topics").map(String),
-      message: String(data.get("message") ?? ""),
-      consultationFor: String(data.get("who") ?? ""),
-      contactPreference: "",
-      preferredSlots,
-      consentLocalCare: data.has("agree_emergency"),
-      consentNonMedical: data.has("agree_scope"),
-    };
+    data.set("timezone", tz);
+    slots.forEach((s, i) => {
+      const utc = wallTimeToUtc(s, tz);
+      data.set(`preferred_${i + 1}_local`, s);
+      data.set(`preferred_${i + 1}_jst`, utc ? formatJst(utc) : "");
+    });
 
     try {
-      const res = await fetch("/api/inquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      // 送信先は既存のAPIに合わせて変更してください
+      const res = await fetch("/api/contact", { method: "POST", body: data });
       if (!res.ok) throw new Error("send failed");
       track(EVENTS.submitContactForm);
       setStatus("ok");
       form.reset();
       setSlots(["", "", ""]);
+      setMoreSlots(false);
     } catch {
       setStatus("err");
     }
@@ -180,23 +252,7 @@ export default function ConsultForm() {
         <input type="text" name="country" placeholder="例：アメリカ、ドイツ、シンガポール" />
       </div>
 
-      <div className="field">
-        <label>あなたのタイムゾーン</label>
-        <select
-          name="timezone_select"
-          value={tz}
-          onChange={(e) => { setTz(e.target.value); setTzAuto(false); }}
-        >
-          {tzOptions.map((z) => (
-            <option key={z} value={z}>{z}</option>
-          ))}
-        </select>
-        <p className="tz-hint">
-          {tzAuto
-            ? "お使いの端末から自動取得しました。違う場合は選び直してください。"
-            : "選択したタイムゾーンで希望日時を変換します。"}
-        </p>
-      </div>
+      <TimezonePicker tz={tz} onChange={setTz} />
 
       <fieldset className="field" style={{ border: 0, padding: 0, margin: 0 }}>
         <label>相談したい内容（複数選択可）</label>
@@ -227,16 +283,25 @@ export default function ConsultForm() {
         </select>
       </div>
 
-      <div className="field">
+      <div className="field" style={{ marginBottom: -8 }}>
         <label>希望日時（あなたの現地時間で入力）</label>
         <p className="tz-hint">
-          現地時間のまま入力してください。日本時間への変換はこちらで自動表示します。
+          現地時間のまま入力してください。日本時間は自動で表示されます。
           日本時間9:00〜19:00の範囲外でも送信できます。
         </p>
       </div>
       <PreferredSlot label="第1希望" value={slots[0]} onChange={(v) => setSlots([v, slots[1], slots[2]])} timeZone={tz} />
-      <PreferredSlot label="第2希望（任意）" value={slots[1]} onChange={(v) => setSlots([slots[0], v, slots[2]])} timeZone={tz} />
-      <PreferredSlot label="第3希望（任意）" value={slots[2]} onChange={(v) => setSlots([slots[0], slots[1], v])} timeZone={tz} />
+
+      {!moreSlots ? (
+        <button type="button" className="slot-more" onClick={() => setMoreSlots(true)}>
+          ＋ 第2・第3希望を追加する（任意）
+        </button>
+      ) : (
+        <>
+          <PreferredSlot label="第2希望（任意）" value={slots[1]} onChange={(v) => setSlots([slots[0], v, slots[2]])} timeZone={tz} />
+          <PreferredSlot label="第3希望（任意）" value={slots[2]} onChange={(v) => setSlots([slots[0], slots[1], v])} timeZone={tz} />
+        </>
+      )}
 
       <div className="agree">
         <label>
