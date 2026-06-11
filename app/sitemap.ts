@@ -1,66 +1,26 @@
 import type { MetadataRoute } from "next";
-import { blogPosts } from "@/lib/blog-posts";
-import { enBlogPosts } from "@/lib/en-blog-posts";
-import { siteUrl } from "@/lib/site";
+import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  const lastModified = new Date();
   return [
     {
-      url: siteUrl,
-      lastModified: now,
-      changeFrequency: "weekly",
+      url: `${SITE_URL}/`,
+      lastModified,
+      changeFrequency: "monthly",
       priority: 1,
       alternates: {
-        languages: {
-          ja: siteUrl,
-          en: `${siteUrl}/en`,
-          "x-default": siteUrl
-        }
-      }
+        languages: { ja: `${SITE_URL}/`, en: `${SITE_URL}/en` },
+      },
     },
     {
-      url: `${siteUrl}/en`,
-      lastModified: now,
+      url: `${SITE_URL}/en`,
+      lastModified,
       changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 0.8,
       alternates: {
-        languages: {
-          ja: siteUrl,
-          en: `${siteUrl}/en`,
-          "x-default": siteUrl
-        }
-      }
+        languages: { ja: `${SITE_URL}/`, en: `${SITE_URL}/en` },
+      },
     },
-    {
-      url: `${siteUrl}/blog`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.6
-    },
-    {
-      url: `${siteUrl}/en/blog`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.6
-    },
-    {
-      url: `${siteUrl}/apply`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.5
-    },
-    ...blogPosts.map((post) => ({
-      url: `${siteUrl}/blog/${post.slug}`,
-      lastModified: new Date(post.date),
-      changeFrequency: "monthly" as const,
-      priority: 0.6
-    })),
-    ...enBlogPosts.map((post) => ({
-      url: `${siteUrl}/en/blog/${post.slug}`,
-      lastModified: new Date(post.date),
-      changeFrequency: "monthly" as const,
-      priority: 0.6
-    }))
   ];
 }

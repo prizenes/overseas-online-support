@@ -1,21 +1,23 @@
 "use client";
 
-import { trackEvent, type AnalyticsEventName } from "@/lib/analytics";
+import { track } from "@/lib/analytics";
+import type { EventName } from "@/lib/site";
+import type { AnchorHTMLAttributes, ReactNode } from "react";
 
-type TrackedLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
-  eventName?: AnalyticsEventName;
+type Props = AnchorHTMLAttributes<HTMLAnchorElement> & {
+  event?: EventName;
+  eventParams?: Record<string, unknown>;
+  children: ReactNode;
 };
 
-export function TrackedLink({ eventName, onClick, children, ...props }: TrackedLinkProps) {
+/** クリック時にGA4/Vercelイベントを送信するリンク */
+export default function TrackedLink({ event, eventParams, onClick, children, ...rest }: Props) {
   return (
     <a
-      {...props}
-      onClick={(event) => {
-        if (eventName) {
-          trackEvent(eventName);
-        }
-
-        onClick?.(event);
+      {...rest}
+      onClick={(e) => {
+        if (event) track(event, eventParams);
+        onClick?.(e);
       }}
     >
       {children}
