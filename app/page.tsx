@@ -8,6 +8,9 @@ import type { AnalyticsEventName } from "@/lib/analytics";
 import { brandAssets, concerns, faqs, plans, safetyNotes, serviceName, targetUsers } from "@/lib/service-content";
 import { organizationJsonLd, prizenesOfficialUrl, siteUrl } from "@/lib/site";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 const pageTitle =
   "海外在住日本人のオンライン運動サポート｜腰痛・膝痛・歩行不安を日本語で理学療法士に相談";
 const pageDescription =
