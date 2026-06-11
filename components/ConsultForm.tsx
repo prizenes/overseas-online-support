@@ -210,16 +210,47 @@ export default function ConsultForm() {
     setStatus("sending");
     const form = e.currentTarget;
     const data = new FormData(form);
-    data.set("timezone", tz);
-    slots.forEach((s, i) => {
-      const utc = wallTimeToUtc(s, tz);
-      data.set(`preferred_${i + 1}_local`, s);
-      data.set(`preferred_${i + 1}_jst`, utc ? formatJst(utc) : "");
-    });
+
+    const preferredSlots = slots
+      .map((s, i) => {
+        const utc = wallTimeToUtc(s, tz);
+        if (!s || !utc) return null;
+        const h = jstHour(utc);
+        return {
+          label: `第${i + 1}希望`,
+          localDateTime: s,
+          localTimeZone: tz,
+          localDisplay: new Intl.DateTimeFormat("ja-JP", {
+            timeZone: tz,
+            month: "long", day: "numeric", weekday: "short",
+            hour: "2-digit", minute: "2-digit",
+          }).format(utc),
+          japanDisplay: formatJst(utc),
+          isWithinJapanBusinessHours: h >= 9 && h <= 19,
+        };
+      })
+      .filter(Boolean);
+
+    const payload = {
+      name: String(data.get("name") ?? ""),
+      email: String(data.get("email") ?? ""),
+      country: String(data.get("country") ?? ""),
+      timezone: tz,
+      topics: data.getAll("topics").map(String),
+      message: String(data.get("message") ?? ""),
+      consultationFor: String(data.get("who") ?? ""),
+      contactPreference: "",
+      preferredSlots,
+      consentLocalCare: data.has("agree_emergency"),
+      consentNonMedical: data.has("agree_scope"),
+    };
 
     try {
-      // 送信先は既存のAPIに合わせて変更してください
-      const res = await fetch("/api/contact", { method: "POST", body: data });
+      const res = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
       if (!res.ok) throw new Error("send failed");
       track(EVENTS.submitContactForm);
       setStatus("ok");

@@ -333,7 +333,7 @@ export default function Page() {
                     className="btn btn-ghost"
                     event={EVENTS.clickPrisenessOfficialSite}
                   >
-                    札幌でリハビリならリハビリジム プライズネス | 完全予約制のリハビリジム
+                    リハビリジム プライズネス公式サイトを見る
                   </TrackedLink>
                 </div>
               </div>

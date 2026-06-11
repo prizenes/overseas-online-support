@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* =============================================================
    Overseas Online Support LP — design tokens & styles
    白 / ベージュ / 淡いグリーン / 柔らかいブルー。
