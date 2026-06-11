@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* =============================================================
    Overseas Online Support LP — design tokens & styles
    白 / ベージュ / 淡いグリーン / 柔らかいブルー。
@@ -211,6 +207,70 @@ p { margin: 0 0 1em; }
 .price-card p { font-size: 0.9rem; color: var(--ink-soft); flex: 1; margin: 0; }
 .price-card .btn { font-size: 0.88rem; padding: 11px 18px; }
 
+
+/* pricing: featured hero card */
+.price-hero {
+  background: #fff; border: 2px solid var(--green-600); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 36px 40px; margin-top: 40px;
+  display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center;
+}
+.price-hero h3 { font-size: 1.4rem; }
+.price-hero p { font-size: 0.95rem; color: var(--ink-soft); margin: 0; }
+.price-hero-badge {
+  display: inline-block; background: var(--green-600); color: #fff;
+  font-size: 0.76rem; letter-spacing: 0.1em; border-radius: 999px;
+  padding: 4px 16px; margin-bottom: 12px;
+}
+.price-hero-cta { text-align: center; }
+.price-hero-cta .price { font-family: var(--font-display); font-size: 2.6rem; margin-bottom: 12px; }
+.price-sub-label {
+  margin: 36px 0 14px; font-size: 0.85rem; letter-spacing: 0.14em; color: var(--ink-soft);
+}
+.price-grid.sub { margin-top: 0; grid-template-columns: repeat(4, 1fr); }
+.price-grid.sub .price { font-size: 1.5rem; }
+
+/* timezone picker */
+.tz-current {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 8px 14px; background: var(--paper); border: 1px solid var(--line);
+  border-radius: 10px; padding: 11px 14px; font-size: 0.95rem;
+}
+.tz-current small { color: var(--ink-soft); margin-left: 8px; }
+.tz-toggle {
+  background: none; border: none; cursor: pointer; font: inherit;
+  font-size: 0.85rem; color: var(--green-700); text-decoration: underline; padding: 0;
+}
+.tz-toggle:hover { color: var(--green-600); }
+.tz-picker {
+  margin-top: 10px; border: 1px solid var(--line); border-radius: 10px;
+  padding: 12px; background: #fff;
+}
+.tz-picker input[type="text"] {
+  width: 100%; border: 1px solid var(--line); border-radius: 8px;
+  padding: 10px 12px; font: inherit; background: var(--paper);
+}
+.tz-options {
+  list-style: none; margin: 8px 0 0; padding: 0;
+  max-height: 230px; overflow-y: auto; display: grid; gap: 2px;
+}
+.tz-options button {
+  width: 100%; display: flex; justify-content: space-between; align-items: center;
+  background: none; border: none; cursor: pointer; font: inherit; font-size: 0.9rem;
+  text-align: left; padding: 8px 10px; border-radius: 7px; color: var(--ink);
+}
+.tz-options button:hover { background: var(--green-050); }
+.tz-options button.selected { background: var(--green-050); color: var(--green-700); font-weight: 600; }
+.tz-options button small { color: var(--ink-soft); font-weight: 400; }
+.tz-empty { font-size: 0.88rem; color: var(--ink-soft); padding: 10px; }
+
+/* preferred slot expander */
+.slot-more {
+  background: none; border: 1px dashed var(--line); border-radius: 10px;
+  cursor: pointer; font: inherit; font-size: 0.9rem; color: var(--green-700);
+  padding: 11px; width: 100%; text-align: center;
+}
+.slot-more:hover { background: var(--green-050); }
+
 /* flow */
 .flow { counter-reset: step; display: grid; gap: 0; max-width: 640px; margin: 0 auto; }
 .flow li {
@@ -306,13 +366,19 @@ p { margin: 0 0 1em; }
   .section { padding: 64px 0; }
   .hero .inner { grid-template-columns: 1fr; padding: 44px 0 56px; gap: 34px; }
   .split, .form-wrap, .therapist { grid-template-columns: 1fr; }
-  .worry-grid, .price-grid { grid-template-columns: 1fr 1fr; }
+  .worry-grid, .price-grid, .price-grid.sub { grid-template-columns: 1fr 1fr; }
+  .price-hero { grid-template-columns: 1fr; padding: 26px 24px; text-align: left; }
+  .price-hero-cta { text-align: left; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .price-hero-cta .price { margin-bottom: 0; font-size: 2.1rem; }
   .scope { grid-template-columns: 1fr; }
   .therapist { padding: 28px; }
   .consult-form { padding: 26px 22px; }
 }
 @media (max-width: 560px) {
-  .worry-grid, .price-grid, .check-grid { grid-template-columns: 1fr; }
+  .worry-grid, .price-grid, .price-grid.sub { grid-template-columns: 1fr; }
+  .check-grid { grid-template-columns: 1fr 1fr; gap: 6px 10px; }
+  .check-grid label { font-size: 0.88rem; }
+  .consult-form { gap: 18px; }
   .hero-ctas .btn { width: 100%; }
   .split.rev-mobile > :first-child { order: 2; }
 }
