@@ -52,6 +52,8 @@ async function sendResendEmail({
 }
 
 export async function sendInquiryEmails(payload: InquiryEmailPayload) {
+  // 管理者（事業者）宛メールが最優先。これが失敗したらリードを取り逃すので
+  // 例外はそのまま上位に投げ、API 側で 500 にする。
   const adminResult = await sendResendEmail({
     to: payload.adminEmail,
     from: payload.fromEmail,
@@ -59,15 +61,24 @@ export async function sendInquiryEmails(payload: InquiryEmailPayload) {
     text: payload.adminText
   });
 
-  const userResult = await sendResendEmail({
-    to: payload.userEmail,
-    from: payload.fromEmail,
-    subject: "お問い合わせありがとうございます｜リハビリジムプライズネス",
-    text: payload.userText
-  });
+  // ユーザー宛の確認メールは「あると親切」程度の位置づけ。
+  // 送信元ドメイン未認証などで失敗しても、問い合わせ自体は成功扱いにする
+  // （管理者には届いており、後日メールで返信するため）。失敗はログのみ。
+  let userEmailSent = false;
+  try {
+    const userResult = await sendResendEmail({
+      to: payload.userEmail,
+      from: payload.fromEmail,
+      subject: "お問い合わせありがとうございます｜リハビリジムプライズネス",
+      text: payload.userText
+    });
+    userEmailSent = userResult.sent;
+  } catch (error) {
+    console.error("User confirmation email failed (non-fatal)", error);
+  }
 
   return {
     adminEmailSent: adminResult.sent,
-    userEmailSent: userResult.sent
+    userEmailSent
   };
 }
