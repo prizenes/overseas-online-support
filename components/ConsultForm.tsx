@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { track } from "@/lib/analytics";
 import { EVENTS } from "@/lib/site";
 
@@ -199,11 +199,20 @@ export default function ConsultForm() {
   const [slots, setSlots] = useState(["", "", ""]);
   const [moreSlots, setMoreSlots] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
+  const formStarted = useRef(false);
 
   useEffect(() => {
     const detected = Intl.DateTimeFormat().resolvedOptions().timeZone;
     if (detected) setTz(detected);
   }, []);
+
+  // フォームへの最初の操作（フォーカス）で一度だけ form_start を送る。
+  // 入力値そのものは一切送らない（イベント名のみ）。
+  function handleFormStart() {
+    if (formStarted.current) return;
+    formStarted.current = true;
+    track(EVENTS.formStart);
+  }
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -263,7 +272,7 @@ export default function ConsultForm() {
   }
 
   return (
-    <form className="consult-form" onSubmit={onSubmit} noValidate>
+    <form className="consult-form" onSubmit={onSubmit} onFocusCapture={handleFormStart} noValidate>
       <div className="field">
         <label>
           お名前<span className="req">必須</span>
