@@ -114,7 +114,7 @@ export default function ConsultForm() {
 
       {status === "ok" && (
         <p className="form-status ok" role="status">
-          送信しました。内容を確認し、メールでご連絡します。この時点で費用は一切かかりません。
+          送信しました。内容を確認し、メールでご連絡します。
         </p>
       )}
       {status === "err" && (

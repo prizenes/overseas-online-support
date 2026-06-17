@@ -389,7 +389,6 @@ export default function Page() {
                 <p className="price-note">
                   料金は目安です。まずは無料相談で状況を伺い、内容が合いそうな場合にのみ、
                   日程調整のあとでご利用方法とお支払いを個別にご案内します。
-                  このページから直接決済に進むことはありません。
                 </p>
               </div>
             </Reveal>
@@ -465,7 +464,7 @@ export default function Page() {
               <ol className="flow">
                 <li className="free">
                   <strong>無料相談</strong>
-                  <span>フォームから現在のお悩みと希望日時を送信。費用はかかりません。</span>
+                  <span>フォームにお名前とメールアドレスを入力して送信するだけ。</span>
                 </li>
                 <li>
                   <strong>内容確認</strong>
@@ -552,7 +551,7 @@ export default function Page() {
                 <h2>30秒で送れる無料相談</h2>
                 <p className="lead">
                   必要なのは、お名前とメールアドレスだけ。くわしい症状や希望日時は、
-                  こちらからの返信メールで一緒に調整します。この段階で費用はかかりません。
+                  こちらからの返信メールで一緒に調整します。
                 </p>
               </div>
             </Reveal>
@@ -598,7 +597,6 @@ export default function Page() {
               >
                 無料で相談する
               </TrackedLink>
-              <span className="btn-note">お支払いの案内は、日程調整のあと・必要な場合のみです。</span>
             </Reveal>
           </div>
         </section>
