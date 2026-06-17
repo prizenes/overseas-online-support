@@ -111,7 +111,6 @@ export default function Page() {
                   サービス内容を見る
                 </a>
               </div>
-              <span className="btn-note">この段階ではお支払いは発生しません。</span>
               <div className="hero-badges">
                 <span>日本語対応</span>
                 <span>海外在住者向け</span>
@@ -194,7 +193,7 @@ export default function Page() {
                 <span className="eyebrow">私たちの立ち位置</span>
                 <h2>現地のサービスと迷っている方へ</h2>
               </div>
-              <div style={{ maxWidth: 720, margin: "0 auto", textAlign: "center" }}>
+              <div style={{ maxWidth: 720, margin: "0 auto", textAlign: "left" }}>
                 <p>
                   現地の医療機関やPhysical Therapyを受けることは大切です。
                   ただ、英語での説明がわかりにくい、運動をどう続ければよいかわからない、
