@@ -109,6 +109,17 @@ p { margin: 0 0 1em; }
 .header-cta { padding: 9px 22px; font-size: 0.9rem; }
 
 /* ---------- hero ---------- */
+.hero-pain {
+  display: inline-block;
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 999px;
+  padding: 8px 18px;
+  margin: 0 0 18px;
+}
 .hero { background: linear-gradient(180deg, var(--beige) 0%, var(--paper) 100%); overflow: hidden; }
 .hero .inner {
   display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px;
@@ -401,6 +412,33 @@ p { margin: 0 0 1em; }
 @media (max-width: 900px) {
   .blog-grid, .from-blog { grid-template-columns: 1fr; }
   .article-cta { padding: 26px 22px; }
+}
+
+/* ---------- sticky mobile CTA ---------- */
+/* デスクトップはヘッダーCTAがあるので非表示。スマホのみ常時表示。 */
+.sticky-cta { display: none; }
+@media (max-width: 900px) {
+  .sticky-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: fixed;
+    left: 12px; right: 12px; bottom: 12px;
+    z-index: 60;
+    background: var(--green-600);
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 16px 24px;
+    border-radius: 999px;
+    box-shadow: 0 6px 24px rgba(46, 56, 51, 0.28);
+  }
+  .sticky-cta span { font-size: 1.2rem; line-height: 1; }
+  /* 固定バーが最終セクション・フッターを隠さないよう余白を確保 */
+  .site-footer { padding-bottom: 96px; }
 }
 
 /* reveal on scroll */

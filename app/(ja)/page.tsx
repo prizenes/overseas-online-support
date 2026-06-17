@@ -88,13 +88,14 @@ export default function Page() {
         <section className="hero">
           <div className="container inner">
             <div className="hero-copy">
+              <p className="hero-pain">現地の病院、英語での説明が不安…</p>
               <h1>
-                海外で身体の不安を感じたとき、
+                海外でも、
                 <br />
-                まず日本語で整理できる相談先を。
+                日本語で身体の相談を。
               </h1>
               <p className="lead">
-                腰痛・膝痛・歩行の不安、現地医療後の運動継続、一時帰国後のフォローまで。
+                現地でのリハビリ・通院後の運動継続から、腰痛・膝痛・歩行の不安、一時帰国後のフォローまで。
                 理学療法士が、日本語で運動の進め方を一緒に整理します。
               </p>
               <div className="hero-ctas">
@@ -549,10 +550,10 @@ export default function Page() {
             <Reveal>
               <div className="section-head">
                 <span className="eyebrow">無料相談</span>
-                <h2>無料相談フォーム</h2>
+                <h2>30秒で送れる無料相談</h2>
                 <p className="lead">
-                  現在のお悩みと希望日時をお聞かせください。内容を確認し、
-                  日程調整やご利用の流れをメールでご案内します。この段階で費用はかかりません。
+                  必要なのは、お名前とメールアドレスだけ。くわしい症状や希望日時は、
+                  こちらからの返信メールで一緒に調整します。この段階で費用はかかりません。
                 </p>
               </div>
             </Reveal>
@@ -603,6 +604,17 @@ export default function Page() {
           </div>
         </section>
       </main>
+
+      {/* ===== スマホ固定CTA（モバイルのみ常時表示） ===== */}
+      <TrackedLink
+        href={CONTACT_ANCHOR}
+        className="sticky-cta"
+        event={EVENTS.clickFreeConsultation}
+        eventParams={{ placement: "sticky" }}
+      >
+        まずは無料相談
+        <span aria-hidden="true">›</span>
+      </TrackedLink>
 
       {/* ===== Footer ===== */}
       <footer className="site-footer">
