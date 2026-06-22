@@ -33,6 +33,18 @@ const FAQ = [
     q: "When should I see a local medical provider instead?",
     a: "Please seek local medical care first for severe pain, numbness, paralysis, sudden worsening of symptoms, or pain after a fall.",
   },
+  {
+    q: "Is Google Meet difficult to use?",
+    a: "No. On a computer, no installation is needed — you just open the link we send you. Only on a smartphone or tablet do you need to install the free Google Meet app in advance. See our How to Join Google Meet page for details.",
+  },
+  {
+    q: "How do I pay? Which credit cards can I use?",
+    a: "Payment is a secure online card payment via Stripe. We accept major brands including Visa, Mastercard, American Express, JCB, Diners Club, and Discover, and cards issued outside Japan can be used. Payment only applies after the free inquiry, once you decide to move to a paid plan such as the initial online consultation.",
+  },
+  {
+    q: "What is your cancellation policy?",
+    a: "Because sessions are fully by appointment, after a booking is confirmed we handle changes by rescheduling rather than refunds. Rescheduling is free up to 24 hours before the start. If you are unwell or have a sudden change of plans, please contact us early. See our Cancellation & Rescheduling Policy page for details.",
+  },
 ];
 
 const faqJsonLd = {
@@ -430,7 +442,9 @@ export default function EnPage() {
             <br />
             Online exercise support in Japanese, from Sapporo, Japan
           </div>
-          <div style={{ display: "flex", gap: 18 }}>
+          <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
+            <a href="/en/cancellation-policy">Cancellation policy</a>
+            <a href="/en/google-meet">Google Meet guide</a>
             <a href={BLOG_PATH}>English Blog</a>
             <TrackedLink
               href={PRISENESS_OFFICIAL_URL}
