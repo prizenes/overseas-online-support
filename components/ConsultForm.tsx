@@ -1,8 +1,42 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { track } from "@/lib/analytics";
 import { EVENTS } from "@/lib/site";
+
+// 日本の受付時間（9:00〜19:00 JST）を、利用者の現地時刻に変換して表示用に整える。
+// 例：America/New_York なら「20:00〜翌06:00」のように返す。
+function jstReceptionInLocal(tz: string): { local: string } | null {
+  try {
+    const now = new Date();
+    const parts = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Tokyo",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).formatToParts(now);
+    const get = (t: string) => Number(parts.find((p) => p.type === t)?.value);
+    const y = get("year");
+    const m = get("month");
+    const d = get("day");
+    // JST = UTC+9（DSTなし）。JST 9:00 = UTC 0:00、JST 19:00 = UTC 10:00。
+    const start = new Date(Date.UTC(y, m - 1, d, 0, 0));
+    const end = new Date(Date.UTC(y, m - 1, d, 10, 0));
+    const clock = (date: Date) =>
+      new Intl.DateTimeFormat("en-GB", {
+        timeZone: tz,
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      }).format(date);
+    const weekday = (date: Date) =>
+      new Intl.DateTimeFormat("en-US", { timeZone: tz, weekday: "short" }).format(date);
+    const crossesDay = weekday(start) !== weekday(end);
+    return { local: `${clock(start)}〜${crossesDay ? "翌" : ""}${clock(end)}` };
+  } catch {
+    return null;
+  }
+}
 
 // ---- 本体 -------------------------------------------------------------
 // 海外在住日本人のスマホ流入を想定し、初回フォームは最小限に。
@@ -14,6 +48,7 @@ export default function ConsultForm() {
   const [tz, setTz] = useState("Asia/Tokyo");
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
   const formStarted = useRef(false);
+  const reception = useMemo(() => jstReceptionInLocal(tz), [tz]);
 
   useEffect(() => {
     const detected = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -96,7 +131,7 @@ export default function ConsultForm() {
       </div>
 
       <fieldset className="field" style={{ border: 0, padding: 0, margin: 0 }}>
-        <label>いまのお気持ち（任意）</label>
+        <label>ご相談の段階（任意）</label>
         <div className="radio-row">
           <label>
             <input type="radio" name="inquiry_type" value="まず相談したい" /> まず相談してみたい
@@ -112,8 +147,14 @@ export default function ConsultForm() {
         <input
           type="text"
           name="preferred_timing"
-          placeholder="例：土日の午前、平日の夜など（あなたの現地時間で）"
+          placeholder="例：土曜の午後、平日の夜など（あなたの現地時間で）"
         />
+        {reception && (
+          <p className="jst-result">
+            対応できるのは日本時間 9:00〜19:00。あなたの地域では{" "}
+            <strong>現地 {reception.local}</strong> にあたります。この範囲でご希望をお書きください。
+          </p>
+        )}
         <p className="tz-hint">
           利用を検討中の方は、ざっくりで構いません。日本時間との調整はこちらで行います。
         </p>
