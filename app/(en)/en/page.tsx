@@ -290,6 +290,25 @@ export default function EnPage() {
                 </li>
               </ol>
             </Reveal>
+
+            <Reveal>
+              <figure className="setup-figure">
+                <h3>How an online session works</h3>
+                <p>Setting up your space like this at home makes the session run smoothly.</p>
+                <Image
+                  src="/images/overseas-support/online-session-setup-en.png"
+                  alt="How to prepare at home for an online session: set the camera so your full body is visible, place your device on a table or shelf, stay 2-3 m away, use a bright room, wear comfortable clothing, prepare a chair and mat, and join from the Google Meet link you receive."
+                  width={1122}
+                  height={1402}
+                  loading="lazy"
+                  sizes="(max-width: 760px) 100vw, 680px"
+                  style={{ width: "100%", height: "auto", borderRadius: "var(--radius)", boxShadow: "var(--shadow)" }}
+                />
+                <figcaption>
+                  <a href="/en/google-meet" className="inline-link">See how to join Google Meet →</a>
+                </figcaption>
+              </figure>
+            </Reveal>
           </div>
         </section>
 

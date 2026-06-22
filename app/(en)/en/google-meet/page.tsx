@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import TrackedLink from "@/components/TrackedLink";
 import { EVENTS, PRISENESS_OFFICIAL_URL } from "@/lib/site";
 import { BLOG_PATH } from "@/lib/blog";
@@ -50,6 +51,17 @@ export default function EnGoogleMeetGuidePage() {
           setup is required — on the day, you simply open the link we send you. Here is what to
           prepare, depending on your device.
         </p>
+
+        <figure className="setup-figure" style={{ marginTop: 0, marginBottom: 30 }}>
+          <Image
+            src="/images/overseas-support/online-session-setup-en.png"
+            alt="How to prepare at home for an online session: set the camera so your full body is visible, place your device on a table or shelf, stay 2-3 m away, use a bright room, wear comfortable clothing, prepare a chair and mat, and join from the Google Meet link you receive."
+            width={1122}
+            height={1402}
+            sizes="(max-width: 760px) 100vw, 680px"
+            style={{ width: "100%", height: "auto", borderRadius: "var(--radius)", boxShadow: "var(--shadow)" }}
+          />
+        </figure>
 
         <section className="guide-card">
           <h2>
