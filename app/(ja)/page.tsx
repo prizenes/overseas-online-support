@@ -548,6 +548,25 @@ export default function Page() {
                 </li>
               </ol>
             </Reveal>
+
+            <Reveal>
+              <figure className="setup-figure">
+                <h3>オンライン相談は、こんなふうに受けられます</h3>
+                <p>ご自宅でこのように準備いただくと、スムーズに相談できます。</p>
+                <Image
+                  src="/images/overseas-support/online-session-setup.png"
+                  alt="オンライン相談を自宅で受けるための準備のポイント。全身が映るように設定、機器を机や棚に置く、機器から2〜3m離れる、明るい部屋、動きやすい服装、椅子やマットを準備、送られたGoogle Meetのリンクから参加。"
+                  width={1122}
+                  height={1402}
+                  loading="lazy"
+                  sizes="(max-width: 760px) 100vw, 680px"
+                  style={{ width: "100%", height: "auto", borderRadius: "var(--radius)", boxShadow: "var(--shadow)" }}
+                />
+                <figcaption>
+                  <a href="/google-meet" className="inline-link">Google Meetの参加方法をくわしく見る →</a>
+                </figcaption>
+              </figure>
+            </Reveal>
           </div>
         </section>
 

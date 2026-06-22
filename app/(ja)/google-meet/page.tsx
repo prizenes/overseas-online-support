@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import TrackedLink from "@/components/TrackedLink";
 import { EVENTS, PRISENESS_OFFICIAL_URL } from "@/lib/site";
 
@@ -44,6 +45,17 @@ export default function GoogleMeetGuidePage() {
           特別な契約やアカウント作成は不要で、当日はお送りするURLから参加できます。
           ご利用の端末ごとに、事前のご準備をご案内します。
         </p>
+
+        <figure className="setup-figure" style={{ marginTop: 0, marginBottom: 30 }}>
+          <Image
+            src="/images/overseas-support/online-session-setup.png"
+            alt="オンライン相談を自宅で受けるための準備のポイント。全身が映るように設定、機器を机や棚に置く、機器から2〜3m離れる、明るい部屋、動きやすい服装、椅子やマットを準備、送られたGoogle Meetのリンクから参加。"
+            width={1122}
+            height={1402}
+            sizes="(max-width: 760px) 100vw, 680px"
+            style={{ width: "100%", height: "auto", borderRadius: "var(--radius)", boxShadow: "var(--shadow)" }}
+          />
+        </figure>
 
         <section className="guide-card">
           <h2>
