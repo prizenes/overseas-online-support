@@ -460,8 +460,10 @@ export default function Page() {
               <div className="pay-box">
                 <h3>お支払いについて</h3>
                 <p>
-                  お支払いが発生するのは、無料相談のあと・日程が確定したプランのみです。
-                  決済は<strong>Stripe</strong>を利用した安全なオンライン決済で、海外発行のカードもご利用いただけます。
+                  お支払いが発生するのは、無料お問い合わせのあと、初回オンライン相談などの有料プランに進むことが決まった場合のみです。
+                </p>
+                <p>
+                  決済は<strong>Stripe</strong>を利用した安全なオンライン決済です。海外発行のクレジットカードもご利用いただけます。
                 </p>
                 <div className="pay-brands">
                   <span>Visa</span>
