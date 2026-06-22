@@ -9,7 +9,7 @@ import { EVENTS, PLANS, PRISENESS_OFFICIAL_URL, CONTACT_ANCHOR } from "@/lib/sit
 const FAQ = [
   {
     q: "海外からでも受けられますか？",
-    a: "はい。Zoomを使える通信環境があれば、どの国からでも日本語でご相談いただけます。時差をふまえて日程を調整します。",
+    a: "はい。Google Meetを使える通信環境があれば、どの国からでも日本語でご相談いただけます。時差をふまえて日程を調整します。",
   },
   {
     q: "無料相談を送ると、料金が発生しますか？",
@@ -38,6 +38,14 @@ const FAQ = [
   {
     q: "キャンセルや日程変更はできますか？",
     a: "日程変更が必要な場合は、できるだけ早めにメールでご相談ください。具体的な取り扱いは日程調整の際にご案内します。",
+  },
+  {
+    q: "Google Meetは初めてですが、難しくないですか？",
+    a: "いいえ。パソコンならアプリのインストールは不要で、お送りするURLを開くだけで参加できます。スマートフォン・タブレットの場合のみ、事前に無料のGoogle Meetアプリのインストールが必要です。くわしい参加方法は「Google Meetの参加方法」ページでご案内しています。",
+  },
+  {
+    q: "支払い方法は？クレジットカードは使えますか？",
+    a: "Stripeを利用した安全なオンラインカード決済です。Visa・Mastercard・American Express・JCB・Diners Club・Discoverなどの主要ブランドに対応し、海外発行のカードもご利用いただけます。お支払いは無料相談のあと・日程が確定したプランのみで、それ以前に費用は発生しません。",
   },
 ];
 
@@ -114,7 +122,7 @@ export default function Page() {
               <div className="hero-badges">
                 <span>日本語対応</span>
                 <span>海外在住者向け</span>
-                <span>Zoom対応</span>
+                <span>Google Meet対応</span>
                 <span>家族同席可</span>
               </div>
               <JstClock lang="ja" />
@@ -227,7 +235,7 @@ export default function Page() {
                 <ul className="svc-list">
                   <li>
                     <h3>オンライン身体相談</h3>
-                    <p>Zoomで生活状況と身体の不安を伺い、運動を安全に進めるための整理をします。</p>
+                    <p>Google Meetで生活状況と身体の不安を伺い、運動を安全に進めるための整理をします。</p>
                   </li>
                   <li>
                     <h3>自主トレメニュー提案</h3>
@@ -447,6 +455,24 @@ export default function Page() {
                 </>
               );
             })()}
+
+            <Reveal>
+              <div className="pay-box">
+                <h3>お支払いについて</h3>
+                <p>
+                  お支払いが発生するのは、無料相談のあと・日程が確定したプランのみです。
+                  決済は<strong>Stripe</strong>を利用した安全なオンライン決済で、海外発行のカードもご利用いただけます。
+                </p>
+                <div className="pay-brands">
+                  <span>Visa</span>
+                  <span>Mastercard</span>
+                  <span>American Express</span>
+                  <span>JCB</span>
+                  <span>Diners Club</span>
+                  <span>Discover</span>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </section>
 
@@ -483,8 +509,12 @@ export default function Page() {
                   <span>当日の相談がスムーズになるよう、状態を簡単に伺います。</span>
                 </li>
                 <li>
-                  <strong>Zoomでオンライン相談</strong>
-                  <span>日本語で、身体の不安と運動の進め方を整理します。</span>
+                  <strong>Google Meetでオンライン相談</strong>
+                  <span>
+                    日本語で、身体の不安と運動の進め方を整理します。
+                    パソコンはURLを開くだけ、スマホは事前にアプリが必要です。{" "}
+                    <a href="/google-meet" className="inline-link">参加方法を見る →</a>
+                  </span>
                 </li>
                 <li>
                   <strong>運動メニュー共有</strong>

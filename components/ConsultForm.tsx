@@ -42,6 +42,8 @@ export default function ConsultForm() {
       timezone: tz,
       topics: [] as string[],
       message: String(data.get("message") ?? ""),
+      inquiryType: String(data.get("inquiry_type") ?? ""),
+      preferredTiming: String(data.get("preferred_timing") ?? ""),
       consultationFor: "",
       contactPreference: "",
       preferredSlots: [] as unknown[],
@@ -89,7 +91,31 @@ export default function ConsultForm() {
           placeholder="例：海外赴任中で、半年ほど前から腰に違和感があります。日本語で相談したいです。"
         />
         <p className="tz-hint">
-          くわしい症状・居住国・希望日時は、こちらからの返信メールで一緒に調整します。ここでは書かなくて大丈夫です。
+          くわしい症状・居住国は、こちらからの返信メールで一緒に調整します。ここでは書かなくて大丈夫です。
+        </p>
+      </div>
+
+      <fieldset className="field" style={{ border: 0, padding: 0, margin: 0 }}>
+        <label>いまのお気持ち（任意）</label>
+        <div className="radio-row">
+          <label>
+            <input type="radio" name="inquiry_type" value="まず相談したい" /> まず相談してみたい
+          </label>
+          <label>
+            <input type="radio" name="inquiry_type" value="利用を具体的に検討している" /> 利用を具体的に検討している
+          </label>
+        </div>
+      </fieldset>
+
+      <div className="field">
+        <label>ご希望の曜日・時間帯（任意）</label>
+        <input
+          type="text"
+          name="preferred_timing"
+          placeholder="例：土日の午前、平日の夜など（あなたの現地時間で）"
+        />
+        <p className="tz-hint">
+          利用を検討中の方は、ざっくりで構いません。日本時間との調整はこちらで行います。
         </p>
       </div>
 

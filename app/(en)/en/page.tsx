@@ -106,7 +106,7 @@ export default function EnPage() {
               <span className="btn-note">No payment is requested at the inquiry stage.</span>
               <div className="hero-badges">
                 <span>Sessions in Japanese</span>
-                <span>Zoom, worldwide</span>
+                <span>Google Meet, worldwide</span>
                 <span>Family can join</span>
                 <span>Time-zone friendly</span>
               </div>
@@ -222,7 +222,7 @@ export default function EnPage() {
                   Priseness is a rehabilitation-focused exercise gym in Sapporo, Japan, run by a
                   licensed physical therapist with over 20 years of experience. Our online
                   exercise support brings the same careful, person-by-person approach to Japanese
-                  speakers living abroad — fully in Japanese, over Zoom, scheduled around your
+                  speakers living abroad — fully in Japanese, over Google Meet, scheduled around your
                   time zone.
                 </p>
                 <div className="hero-ctas" style={{ marginTop: 24 }}>
@@ -270,7 +270,7 @@ export default function EnPage() {
                 </li>
                 <li>
                   <strong>Online session in Japanese</strong>
-                  <span>Held on Zoom. Family members are welcome to join.</span>
+                  <span>Held on Google Meet. Family members are welcome to join.</span>
                 </li>
                 <li>
                   <strong>Exercise guidance shared</strong>

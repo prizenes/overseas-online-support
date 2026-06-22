@@ -43,7 +43,7 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         h2: "What is Japanese-speaking exercise support?",
         paragraphs: [
-          "It is a way to organize your physical concerns and your exercise direction in your own language. In an online session held in Japanese over Zoom, a physical therapist from Japan listens to your situation, reviews how you move, and helps you find exercises and self-care routines you can continue at home.",
+          "It is a way to organize your physical concerns and your exercise direction in your own language. In an online session held in Japanese over Google Meet, a physical therapist from Japan listens to your situation, reviews how you move, and helps you find exercises and self-care routines you can continue at home.",
           "This is physical therapist-based exercise support, not a medical service. It does not replace local medical providers, and we encourage you to consult local medical providers when needed. What it adds is the comfort of discussing your body in Japanese, without translating symptoms or nuances into English.",
         ],
       },
@@ -96,7 +96,7 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         h2: "What a session looks like",
         paragraphs: [
-          "Over Zoom, the physical therapist asks about your situation, watches how you move within a safe and comfortable range, and helps you find a direction for exercise and self-care you can keep up at home. Afterwards, a simple routine is shared in Japanese by PDF or video.",
+          "Over Google Meet, the physical therapist asks about your situation, watches how you move within a safe and comfortable range, and helps you find a direction for exercise and self-care you can keep up at home. Afterwards, a simple routine is shared in Japanese by PDF or video.",
           "Online exercise guidance for back concerns is intentionally gradual: the goal is steady continuation, not pushing through discomfort. Follow-up sessions are available if you want support staying consistent.",
         ],
       },
@@ -134,7 +134,7 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         h2: "Sorting out what your knees can do",
         paragraphs: [
-          "Knees respond to how the whole body moves — hips, posture, daily habits, even the layout of your home. In a Japanese-language session over Zoom, the physical therapist asks about your daily life, observes simple movements, and helps you understand what kind of activity is realistic right now.",
+          "Knees respond to how the whole body moves — hips, posture, daily habits, even the layout of your home. In a Japanese-language session over Google Meet, the physical therapist asks about your daily life, observes simple movements, and helps you understand what kind of activity is realistic right now.",
           "The outcome is not a generic exercise list, but Japanese-speaking exercise guidance matched to your situation: which movements to start with, how much is enough, and how to adjust when something feels off.",
         ],
       },
@@ -225,7 +225,7 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         h2: "What online support can and cannot do",
         paragraphs: [
-          "Online, a physical therapist from Japan can listen to your situation in Japanese, observe how you move over Zoom, help you organize your concerns, and share exercise and self-care directions you can continue at home.",
+          "Online, a physical therapist from Japan can listen to your situation in Japanese, observe how you move over Google Meet, help you organize your concerns, and share exercise and self-care directions you can continue at home.",
           "What it cannot do is equally important: it cannot perform hands-on assessment, it cannot judge the cause of symptoms, and it does not replace your doctor or your local physical therapist. It is guidance from Japan that works alongside local care.",
         ],
       },

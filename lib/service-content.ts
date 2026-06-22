@@ -119,7 +119,7 @@ export const safetyNotes = [
 export const faqs = [
   {
     question: "海外からでも受けられますか？",
-    answer: "はい。Zoomを使用できる通信環境があれば、海外から日本語でご相談いただけます。"
+    answer: "はい。Google Meetを使用できる通信環境があれば、海外から日本語でご相談いただけます。"
   },
   {
     question: "無料相談後はどうなりますか？",

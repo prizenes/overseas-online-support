@@ -8,6 +8,8 @@ type InquiryPayload = {
   timezone?: string;
   topics?: string[];
   message?: string;
+  inquiryType?: string;
+  preferredTiming?: string;
   consultationFor?: string;
   contactPreference?: string;
   preferredSlots?: {
@@ -62,6 +64,8 @@ function buildAdminText(payload: NormalizedInquiryPayload) {
     `メールアドレス: ${payload.email}`,
   ];
 
+  if (payload.inquiryType) lines.push(`いまのお気持ち: ${payload.inquiryType}`);
+  if (payload.preferredTiming) lines.push(`希望の曜日・時間帯: ${payload.preferredTiming}`);
   if (payload.timezone) lines.push(`利用者のタイムゾーン（自動検出）: ${payload.timezone}`);
   if (payload.country) lines.push(`居住国: ${payload.country}`);
   if (payload.topics.length) lines.push(`相談したい内容: ${payload.topics.join(", ")}`);
@@ -125,6 +129,8 @@ export async function POST(request: Request) {
     timezone: compact(body.timezone, 120),
     topics: Array.isArray(body.topics) ? body.topics.map((topic) => compact(topic, 80)).filter(Boolean) : [],
     message: compact(body.message),
+    inquiryType: compact(body.inquiryType, 60),
+    preferredTiming: compact(body.preferredTiming, 200),
     consultationFor: compact(body.consultationFor, 120),
     contactPreference: compact(body.contactPreference, 120),
     preferredSlots,

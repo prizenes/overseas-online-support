@@ -68,7 +68,7 @@ export const enBlogPosts: EnBlogPost[] = [
       {
         heading: "How online support works",
         body: [
-          "The process starts with a free inquiry. After reviewing your concern, we coordinate the schedule and explain the next steps. The online session is held via Zoom, and exercise guidance or follow-up suggestions are provided when appropriate.",
+          "The process starts with a free inquiry. After reviewing your concern, we coordinate the schedule and explain the next steps. The online session is held via Google Meet, and exercise guidance or follow-up suggestions are provided when appropriate.",
           "You do not need to decide everything before contacting us. If you are unsure whether this service is appropriate for you, you can start by telling us your current concern in Japanese."
         ]
       },

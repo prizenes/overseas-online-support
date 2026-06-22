@@ -83,7 +83,7 @@ export const PLANS: Plan[] = [
     en: "Initial Online Consultation",
     price: "$79",
     jaNote: "60分。身体の不安と運動の進め方を、日本語でじっくり整理します。",
-    enNote: "60 min on Zoom. We organize your concerns and exercise direction in Japanese.",
+    enNote: "60 min on Google Meet. We organize your concerns and exercise direction in Japanese.",
     event: EVENTS.clickPlanInitial79,
     featured: true,
   },
