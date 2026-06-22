@@ -44,6 +44,8 @@ export type Plan = {
   en: string;
   price: string;
   per?: "month";
+  durationJa?: string;
+  durationEn?: string;
   jaNote: string;
   enNote: string;
   event?: EventName;
@@ -80,48 +82,49 @@ export const PLANS: Plan[] = [
   {
     id: "initial",
     ja: "初回オンライン身体相談",
-    en: "Initial Online Consultation",
+    en: "Initial Online Body Consultation",
     price: "$79",
-    jaNote: "60分。身体の不安と運動の進め方を、日本語でじっくり整理します。",
-    enNote: "60 min on Google Meet. We organize your concerns and exercise direction in Japanese.",
+    durationJa: "60分",
+    durationEn: "60 min",
+    jaNote:
+      "現在のお悩み、痛みの出方、運動内容、生活環境などを確認し、今後の運動の進め方を一緒に整理します。初めての方は、まずこちらのメニューをご利用ください。",
+    enNote:
+      "We review your current concerns, how pain appears, your exercise, and your daily environment, then organize how to move forward together in Japanese. If this is your first time, please start here.",
     event: EVENTS.clickPlanInitial79,
     featured: true,
   },
   {
     id: "single",
-    ja: "単発フォロー",
-    en: "Single Follow-up Session",
-    price: "$69",
-    jaNote: "45分。運動メニューの確認や、継続中の不安を相談できます。",
-    enNote: "45 min. Review your exercise menu or discuss concerns during continuation.",
-    event: EVENTS.clickPlanFollowup69,
+    ja: "単発フォロー相談",
+    en: "Single Follow-up Consultation",
+    price: "$79",
+    durationJa: "45分",
+    durationEn: "45 min",
+    jaNote:
+      "初回相談後に、運動内容の確認や修正をしたい方向けの単発相談です。必要なタイミングだけ相談したい方にもご利用いただけます。",
+    enNote:
+      "A one-time session after your first consultation, to check or adjust your exercise. Also for those who want to consult only when needed.",
   },
   {
     id: "monthly2",
-    ja: "月2回オンライン運動サポート",
-    en: "Monthly Support (2 sessions)",
+    ja: "継続オンラインサポート 月2回",
+    en: "Ongoing Online Support (2 sessions / month)",
     price: "$149",
     per: "month",
-    jaNote: "月2回のフォローで、無理のない運動継続を支えます。",
-    enNote: "Two sessions per month to support steady exercise continuation.",
-    event: EVENTS.clickPlanMonthly149,
+    jaNote:
+      "月2回のオンライン相談で、運動内容を確認しながら継続をサポートします。運動を一人で続けるのが不安な方、定期的に状態を見直したい方向けです。",
+    enNote:
+      "Two online sessions a month to check your exercise and support you in continuing. For those who feel unsure about continuing alone, or want regular reviews.",
   },
   {
     id: "monthly4",
-    ja: "月4回オンライン運動サポート",
-    en: "Monthly Support (4 sessions)",
+    ja: "継続オンラインサポート 月4回",
+    en: "Ongoing Online Support (4 sessions / month)",
     price: "$279",
     per: "month",
-    jaNote: "より細かな確認が必要な方向けに、月4回フォローします。",
-    enNote: "Four sessions per month for those who need closer follow-up.",
-    event: EVENTS.clickPlanMonthly279,
-  },
-  {
-    id: "formcheck",
-    ja: "動画フォームチェック",
-    en: "Video Form Check",
-    price: "$29",
-    jaNote: "運動フォームの動画を確認し、続けやすい調整点を共有します。",
-    enNote: "We review your exercise video and share adjustment points in Japanese.",
+    jaNote:
+      "週1回程度のペースで、身体の状態や運動内容を確認しながら継続的にサポートします。よりしっかり運動習慣を作りたい方におすすめです。",
+    enNote:
+      "About once a week, we check your physical condition and exercise and support you continuously. Recommended for those who want to build a solid exercise habit.",
   },
 ];

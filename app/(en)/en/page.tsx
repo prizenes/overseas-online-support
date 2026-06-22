@@ -301,33 +301,105 @@ export default function EnPage() {
                 <span className="eyebrow">Pricing</span>
                 <h2>Pricing guide (USD)</h2>
                 <p className="price-note">
-                  Prices are a guide. Everything starts with a free inquiry — there is no direct
-                  checkout on this page.
+                  Start with a free inquiry so we can review your situation. If we can support you
+                  online, we guide you to the Initial Online Body Consultation. Ongoing support is
+                  only suggested after the first consultation, if needed — we never push monthly plans.
                 </p>
               </div>
             </Reveal>
-            <Reveal>
-              <div className="price-grid">
-                {PLANS.map((p) => (
-                  <div className={`price-card ${p.featured ? "featured" : ""}`} key={p.id}>
-                    <h3>{p.en}</h3>
-                    <div className="price">
-                      {p.price}
-                      {p.per && <small> / month</small>}
+            {(() => {
+              const featured = PLANS.find((p) => p.featured)!;
+              const single = PLANS.find((p) => p.id === "single")!;
+              const monthly = PLANS.filter((p) => p.id === "monthly2" || p.id === "monthly4");
+              return (
+                <>
+                  <Reveal>
+                    <div className="price-hero">
+                      <div>
+                        <span className="price-hero-badge">Start here</span>
+                        <h3>{featured.en}</h3>
+                        <p>{featured.enNote}</p>
+                      </div>
+                      <div className="price-hero-cta">
+                        <div className="price">
+                          {featured.price}
+                          {featured.durationEn && <small> / {featured.durationEn}</small>}
+                        </div>
+                        <TrackedLink
+                          href={JA_FORM}
+                          className="btn btn-primary"
+                          event={featured.event ?? EVENTS.clickFreeConsultation}
+                          eventParams={{ plan: featured.id, locale: "en" }}
+                        >
+                          Start with a free inquiry
+                        </TrackedLink>
+                      </div>
                     </div>
-                    <p>{p.enNote}</p>
-                    <TrackedLink
-                      href={JA_FORM}
-                      className="btn btn-ghost"
-                      event={p.event ?? EVENTS.clickFreeConsultation}
-                      eventParams={{ plan: p.id, locale: "en" }}
+                  </Reveal>
+
+                  <Reveal>
+                    <p className="price-sub-label">After your first consultation, when needed</p>
+                    <div
+                      className="price-grid sub"
+                      style={{ gridTemplateColumns: "1fr", maxWidth: 460, margin: "0 auto" }}
                     >
-                      Ask about this plan
-                    </TrackedLink>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
+                      <div className="price-card">
+                        <h3>{single.en}</h3>
+                        <div className="price">
+                          {single.price}
+                          {single.durationEn && <small> / {single.durationEn}</small>}
+                        </div>
+                        <p>{single.enNote}</p>
+                        <p className="plan-status">Offered after your first consultation</p>
+                      </div>
+                    </div>
+                  </Reveal>
+
+                  <Reveal>
+                    <p className="price-sub-label">If you would like ongoing support</p>
+                    <div className="price-grid sub">
+                      {monthly.map((p) => (
+                        <div className="price-card" key={p.id}>
+                          <h3>{p.en}</h3>
+                          <div className="price">
+                            {p.price}
+                            {p.per && <small> / month</small>}
+                          </div>
+                          <p>{p.enNote}</p>
+                          <p className="plan-status">Offered after your first consultation, only if needed</p>
+                        </div>
+                      ))}
+                    </div>
+                  </Reveal>
+
+                  <Reveal>
+                    <div className="pay-box">
+                      <h3>Payment &amp; cancellation</h3>
+                      <p>
+                        Payment only applies after your free inquiry, once the schedule and a paid
+                        plan are confirmed. Payments are processed securely via{" "}
+                        <strong>Stripe</strong>, and cards issued outside Japan can be used.
+                      </p>
+                      <div className="pay-brands">
+                        <span>Visa</span>
+                        <span>Mastercard</span>
+                        <span>American Express</span>
+                        <span>JCB</span>
+                        <span>Diners Club</span>
+                        <span>Discover</span>
+                      </div>
+                      <p style={{ marginTop: 14, marginBottom: 0, fontSize: "0.85rem" }}>
+                        After a booking is confirmed, cancellations are handled by rescheduling rather
+                        than refunds. Rescheduling is free up to 24 hours before; later cancellations
+                        or no-shows are generally non-refundable. If we cannot hold a session on our
+                        side, we reschedule or refund.{" "}
+                        <a href="/en/cancellation-policy" className="inline-link">See the full policy</a>
+                      </p>
+                    </div>
+                  </Reveal>
+                </>
+              );
+            })()}
           </div>
         </section>
 

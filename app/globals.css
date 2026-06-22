@@ -241,8 +241,15 @@ p { margin: 0 0 1em; }
 .price-sub-label {
   margin: 36px 0 14px; font-size: 0.85rem; letter-spacing: 0.14em; color: var(--ink-soft);
 }
-.price-grid.sub { margin-top: 0; grid-template-columns: repeat(4, 1fr); }
+.price-grid.sub { margin-top: 0; grid-template-columns: repeat(2, 1fr); }
 .price-grid.sub .price { font-size: 1.5rem; }
+/* 初回相談後にご案内するプランの状態表示（ボタンの代わり） */
+.plan-status {
+  margin: 0; font-size: 0.82rem; font-weight: 600; color: var(--green-700);
+  background: var(--green-050); border-radius: 8px; padding: 9px 12px; text-align: center;
+}
+.price-card .plan-status { flex: 0 0 auto; }
+.price-hero-cta .price small { font-size: 0.9rem; color: var(--ink-soft); font-family: var(--font-body); }
 
 /* timezone picker */
 .tz-current {

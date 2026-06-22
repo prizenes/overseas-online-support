@@ -141,7 +141,7 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         h2: "Continuing at home",
         paragraphs: [
-          "After the session, your routine is shared in Japanese by PDF or video. Many people use the video form check option as well — you record yourself exercising at home, and the physical therapist reviews it and shares adjustment points in Japanese.",
+          "After the session, your routine is shared in Japanese by PDF or video, so you can keep going at home with clear guidance you can revisit anytime.",
           "If you are also seeing a local provider, this support can sit alongside that care as self-care support and exercise continuation support. We encourage you to consult local medical providers when needed.",
         ],
       },
@@ -180,7 +180,7 @@ export const BLOG_POSTS: BlogPost[] = [
         h2: "What helps continuation",
         paragraphs: [
           "Three things make home exercise stick: a routine matched to your actual home and schedule, a way to check your form, and periodic conversations to adjust the plan. Online exercise guidance in Japanese can provide all three — a physical therapist from Japan reviews your current routine, helps you organize what your local provider explained, and adjusts the plan so it fits your life abroad.",
-          "Monthly follow-up sessions (two or four per month) are available for people who want steady accountability, and a video form check option lets you confirm your movements between sessions.",
+          "Monthly follow-up sessions (two or four per month) are available for people who want steady accountability and regular check-ins between sessions.",
         ],
       },
       {

@@ -50,8 +50,7 @@ export type ServicePlanId =
   | "initial-consultation"
   | "single-followup"
   | "monthly-2"
-  | "monthly-4"
-  | "video-check";
+  | "monthly-4";
 
 export type ServicePlan = {
   id: ServicePlanId;
@@ -74,37 +73,29 @@ export const plans: ServicePlan[] = [
   },
   {
     id: "single-followup",
-    name: "単発フォロー 45分",
-    price: "$69",
-    description: "運動メニューの確認や継続時の不安を相談できます。",
+    name: "単発フォロー相談 45分",
+    price: "$79",
+    description: "初回相談後に、運動内容の確認や修正をしたい方向けの単発相談です。",
     checkoutMode: "payment",
     envKey: "STRIPE_PRICE_SINGLE_FOLLOWUP"
   },
   {
     id: "monthly-2",
-    name: "月2回オンライン運動サポート",
+    name: "継続オンラインサポート 月2回",
     price: "$149",
     interval: "/month",
-    description: "月2回のオンラインフォローで、無理のない運動継続を支援します。",
+    description: "月2回のオンライン相談で、運動内容を確認しながら継続をサポートします。",
     checkoutMode: "subscription",
     envKey: "STRIPE_PRICE_MONTHLY_2"
   },
   {
     id: "monthly-4",
-    name: "月4回オンライン運動サポート",
+    name: "継続オンラインサポート 月4回",
     price: "$279",
     interval: "/month",
-    description: "より細かい確認が必要な方向けに、月4回フォローします。",
+    description: "週1回程度のペースで、身体の状態や運動内容を確認しながら継続的にサポートします。",
     checkoutMode: "subscription",
     envKey: "STRIPE_PRICE_MONTHLY_4"
-  },
-  {
-    id: "video-check",
-    name: "動画フォームチェック",
-    price: "$29",
-    description: "運動フォーム動画を確認し、続けやすい調整ポイントを共有します。",
-    checkoutMode: "payment",
-    envKey: "STRIPE_PRICE_VIDEO_CHECK"
   }
 ];
 

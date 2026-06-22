@@ -75,7 +75,7 @@ export const enBlogPosts: EnBlogPost[] = [
       {
         heading: "Pricing",
         body: [
-          "The current reference prices are: initial online consultation 60 minutes for $79, single follow-up 45 minutes for $69, monthly support with 2 sessions for $149/month, monthly support with 4 sessions for $279/month, and video form check for $29.",
+          "The current reference prices are: initial online body consultation 60 minutes for $79, single follow-up consultation 45 minutes for $79, ongoing online support with 2 sessions for $149/month, and ongoing online support with 4 sessions for $279/month.",
           "Payment is made after inquiry and scheduling. We do not ask you to pay before confirming the basic details of your concern and appointment."
         ]
       },

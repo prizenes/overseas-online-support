@@ -395,44 +395,65 @@ export default function Page() {
                 <span className="eyebrow">料金の目安</span>
                 <h2>料金の目安</h2>
                 <p className="price-note">
-                  料金は目安です。まずは無料相談で状況を伺い、内容が合いそうな場合にのみ、
-                  日程調整のあとでご利用方法とお支払いを個別にご案内します。
+                  まずは無料お問い合わせで内容を確認し、オンラインで対応可能な場合に
+                  初回オンライン身体相談をご案内します。継続サポートは、初回相談後に必要な場合のみご案内します。
+                  月額プランを無理におすすめすることはありません。
                 </p>
               </div>
             </Reveal>
-            {/* 入口となる初回相談を主役カードとして大きく表示 */}
+            {/* 初回相談を主役として大きく表示。単発・継続は初回後のご案内として表示 */}
             {(() => {
               const featured = PLANS.find((p) => p.featured)!;
-              const others = PLANS.filter((p) => !p.featured);
+              const single = PLANS.find((p) => p.id === "single")!;
+              const monthly = PLANS.filter((p) => p.id === "monthly2" || p.id === "monthly4");
               return (
                 <>
                   <Reveal>
                     <div className="price-hero">
                       <div>
-                        <span className="price-hero-badge">まずはこの相談から</span>
+                        <span className="price-hero-badge">初めての方はまずこちら</span>
                         <h3>{featured.ja}</h3>
                         <p>{featured.jaNote}</p>
-                        <p className="form-note" style={{ marginTop: 8 }}>
-                          ご利用は無料相談のあと。このページから直接決済に進むことはありません。
-                        </p>
                       </div>
                       <div className="price-hero-cta">
-                        <div className="price">{featured.price}</div>
+                        <div className="price">
+                          {featured.price}
+                          {featured.durationJa && <small> / {featured.durationJa}</small>}
+                        </div>
                         <TrackedLink
                           href={CONTACT_ANCHOR}
                           className="btn btn-primary"
                           event={featured.event ?? EVENTS.clickFreeConsultation}
                           eventParams={{ plan: featured.id }}
                         >
-                          このプランについて相談する
+                          まずは無料お問い合わせ
                         </TrackedLink>
                       </div>
                     </div>
                   </Reveal>
+
                   <Reveal>
-                    <p className="price-sub-label">継続・補助プラン</p>
+                    <p className="price-sub-label">初回相談後の、必要なときのフォロー</p>
+                    <div
+                      className="price-grid sub"
+                      style={{ gridTemplateColumns: "1fr", maxWidth: 460, margin: "0 auto" }}
+                    >
+                      <div className="price-card">
+                        <h3>{single.ja}</h3>
+                        <div className="price">
+                          {single.price}
+                          {single.durationJa && <small> / {single.durationJa}</small>}
+                        </div>
+                        <p>{single.jaNote}</p>
+                        <p className="plan-status">初回相談後にご案内します</p>
+                      </div>
+                    </div>
+                  </Reveal>
+
+                  <Reveal>
+                    <p className="price-sub-label">継続をご希望の方</p>
                     <div className="price-grid sub">
-                      {others.map((p) => (
+                      {monthly.map((p) => (
                         <div className="price-card" key={p.id}>
                           <h3>{p.ja}</h3>
                           <div className="price">
@@ -440,14 +461,7 @@ export default function Page() {
                             {p.per && <small> / 月</small>}
                           </div>
                           <p>{p.jaNote}</p>
-                          <TrackedLink
-                            href={CONTACT_ANCHOR}
-                            className="btn btn-ghost"
-                            event={p.event ?? EVENTS.clickFreeConsultation}
-                            eventParams={{ plan: p.id }}
-                          >
-                            このプランについて相談する
-                          </TrackedLink>
+                          <p className="plan-status">初回相談後、必要な場合のみご案内します</p>
                         </div>
                       ))}
                     </div>
@@ -474,9 +488,10 @@ export default function Page() {
                   <span>Discover</span>
                 </div>
                 <p style={{ marginTop: 14, marginBottom: 0, fontSize: "0.85rem" }}>
-                  キャンセル・日程変更については{" "}
-                  <a href="/cancellation-policy" className="inline-link">こちら</a>{" "}
-                  をご確認ください。
+                  ご予約確定後のキャンセルは、返金ではなく日程変更を基本とさせていただきます。
+                  開始24時間前までの日程変更は無料、それ以降のキャンセル・無断キャンセルは原則返金いたしかねます。
+                  施設側の都合や通信トラブルで実施できなかった場合は、日程変更または返金で対応します。{" "}
+                  <a href="/cancellation-policy" className="inline-link">詳しくはこちら</a>
                 </p>
               </div>
             </Reveal>
@@ -584,11 +599,12 @@ export default function Page() {
           <div className="container">
             <Reveal>
               <div className="section-head">
-                <span className="eyebrow">無料相談</span>
-                <h2>30秒で送れる無料相談</h2>
+                <span className="eyebrow">無料お問い合わせ</span>
+                <h2>まずは無料お問い合わせ</h2>
                 <p className="lead">
-                  必要なのは、お名前とメールアドレスだけ。くわしい症状や希望日時は、
-                  こちらからの返信メールで一緒に調整します。
+                  無料お問い合わせは、初回オンライン身体相談に進む前の事前確認です。この段階ではお支払いは発生しません。
+                  内容を確認したうえで、オンラインで対応可能か、初回相談に進む場合の流れをご案内します。
+                  必要なのは、お名前とメールアドレスだけです。
                 </p>
               </div>
             </Reveal>
