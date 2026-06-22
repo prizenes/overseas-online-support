@@ -77,7 +77,7 @@ export default function ConsultForm() {
       timezone: tz,
       topics: [] as string[],
       message: String(data.get("message") ?? ""),
-      inquiryType: String(data.get("inquiry_type") ?? ""),
+      inquiryType: data.getAll("inquiry_type").map(String).join("、"),
       preferredTiming: String(data.get("preferred_timing") ?? ""),
       consultationFor: "",
       contactPreference: "",
@@ -119,7 +119,7 @@ export default function ConsultForm() {
 
       <div className="field">
         <label>
-          ひと言だけ、いまの状況（任意）
+          現在のお悩み・ご相談内容（任意）
         </label>
         <textarea
           name="message"
@@ -131,13 +131,19 @@ export default function ConsultForm() {
       </div>
 
       <fieldset className="field" style={{ border: 0, padding: 0, margin: 0 }}>
-        <label>ご相談の段階（任意）</label>
-        <div className="radio-row">
+        <label>ご利用の検討状況（任意・複数選択可）</label>
+        <div className="check-grid" style={{ gridTemplateColumns: "1fr" }}>
           <label>
-            <input type="radio" name="inquiry_type" value="まず相談したい" /> まず相談してみたい
+            <input type="checkbox" name="inquiry_type" value="まずは内容を問い合わせたい" /> まずは内容を問い合わせたい
           </label>
           <label>
-            <input type="radio" name="inquiry_type" value="利用を具体的に検討している" /> 利用を具体的に検討している
+            <input type="checkbox" name="inquiry_type" value="初回オンライン相談を受けてみたい" /> 初回オンライン相談を受けてみたい
+          </label>
+          <label>
+            <input type="checkbox" name="inquiry_type" value="料金や流れを確認してから検討したい" /> 料金や流れを確認してから検討したい
+          </label>
+          <label>
+            <input type="checkbox" name="inquiry_type" value="家族について相談したい" /> 家族について相談したい
           </label>
         </div>
       </fieldset>

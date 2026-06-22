@@ -129,7 +129,7 @@ export async function POST(request: Request) {
     timezone: compact(body.timezone, 120),
     topics: Array.isArray(body.topics) ? body.topics.map((topic) => compact(topic, 80)).filter(Boolean) : [],
     message: compact(body.message),
-    inquiryType: compact(body.inquiryType, 60),
+    inquiryType: compact(body.inquiryType, 200),
     preferredTiming: compact(body.preferredTiming, 200),
     consultationFor: compact(body.consultationFor, 120),
     contactPreference: compact(body.contactPreference, 120),
