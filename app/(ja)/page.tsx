@@ -37,7 +37,7 @@ const FAQ = [
   },
   {
     q: "キャンセルや日程変更はできますか？",
-    a: "日程変更が必要な場合は、できるだけ早めにメールでご相談ください。具体的な取り扱いは日程調整の際にご案内します。",
+    a: "完全予約制のため、ご予約確定後は原則として返金ではなく別日への日程変更で対応します。日程変更は開始24時間前まで無料です。体調不良など急なご事情がある場合は、お早めにメールでご相談ください。詳しくは「キャンセル・日程変更について」のページをご覧ください。",
   },
   {
     q: "Google Meetは初めてですが、難しくないですか？",
@@ -473,6 +473,11 @@ export default function Page() {
                   <span>Diners Club</span>
                   <span>Discover</span>
                 </div>
+                <p style={{ marginTop: 14, marginBottom: 0, fontSize: "0.85rem" }}>
+                  キャンセル・日程変更については{" "}
+                  <a href="/cancellation-policy" className="inline-link">こちら</a>{" "}
+                  をご確認ください。
+                </p>
               </div>
             </Reveal>
           </div>
@@ -655,7 +660,8 @@ export default function Page() {
             <br />
             海外在住者向けオンライン運動サポート
           </div>
-          <div style={{ display: "flex", gap: 18 }}>
+          <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
+            <a href="/cancellation-policy">キャンセルポリシー</a>
             <TrackedLink
               href={PRISENESS_OFFICIAL_URL}
               target="_blank"
