@@ -107,7 +107,7 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
           <p className="mt-4 leading-8 text-white/80">
             身体の不安を整理し、運動を安全に続けるための相談を日本語で行います。家族同席も可能です。まずは無料問い合わせで相談可否を確認します。
           </p>
-          <Link href="/#apply" className="mt-6 inline-flex rounded-md bg-sea px-6 py-3 font-bold text-white hover:bg-white hover:text-ink">
+          <Link href="/#consult" className="mt-6 inline-flex rounded-md bg-sea px-6 py-3 font-bold text-white hover:bg-white hover:text-ink">
             初回相談について問い合わせる
           </Link>
         </div>
