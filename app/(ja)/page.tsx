@@ -4,6 +4,15 @@ import JstClock from "@/components/JstClock";
 import Reveal from "@/components/Reveal";
 import ConsultForm from "@/components/ConsultForm";
 import { EVENTS, PLANS, PRISENESS_OFFICIAL_URL, CONTACT_ANCHOR } from "@/lib/site";
+import { blogPosts } from "@/lib/blog-posts";
+
+// トップから日本語ブログへ誘導する注目記事(内部リンク=SEOにも効く)
+const FEATURED_BLOG_SLUGS = [
+  "overseas-low-back-pain-japanese",
+  "overseas-rehabilitation-japanese-online",
+  "overseas-physical-therapist-online-consultation-japanese",
+  "overseas-english-medical-explanation-anxiety-exercise-japanese",
+];
 
 // ---------------- FAQ(本文とJSON-LDで共用) ----------------
 const FAQ = [
@@ -613,6 +622,43 @@ export default function Page() {
           </div>
         </section>
 
+        {/* ===== お役立ち記事(ブログ) ===== */}
+        <section className="section" id="blog">
+          <div className="container">
+            <Reveal>
+              <div className="section-head center">
+                <span className="eyebrow">お役立ち記事</span>
+                <h2>海外での身体の不安・運動についての記事</h2>
+                <p className="lead">
+                  海外在住の方が抱えやすい身体の悩みや、日本語での運動相談の使い方をまとめています。
+                </p>
+              </div>
+            </Reveal>
+            <Reveal>
+              <div className="blog-grid">
+                {blogPosts
+                  .filter((p) => FEATURED_BLOG_SLUGS.includes(p.slug))
+                  .map((p) => (
+                    <article className="blog-card" key={p.slug}>
+                      <h2>
+                        <a href={`/blog/${p.slug}`}>{p.title}</a>
+                      </h2>
+                      <p>{p.description}</p>
+                      <a href={`/blog/${p.slug}`} className="blog-more">
+                        続きを読む →
+                      </a>
+                    </article>
+                  ))}
+              </div>
+            </Reveal>
+            <Reveal>
+              <p style={{ textAlign: "center", marginTop: 28 }}>
+                <a href="/blog" className="btn btn-ghost">記事一覧を見る</a>
+              </p>
+            </Reveal>
+          </div>
+        </section>
+
         {/* ===== 無料相談フォーム ===== */}
         <section className="section green" id="consult">
           <div className="container">
@@ -696,6 +742,7 @@ export default function Page() {
             海外在住者向けオンライン運動サポート
           </div>
           <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
+            <a href="/blog">ブログ</a>
             <a href="/cancellation-policy">キャンセルポリシー</a>
             <TrackedLink
               href={PRISENESS_OFFICIAL_URL}
