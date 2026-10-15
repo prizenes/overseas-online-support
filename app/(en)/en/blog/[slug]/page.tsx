@@ -78,12 +78,49 @@ export default async function BlogPost({ params }: Props) {
     image: `${SITE_URL}/images/overseas-support/hero-online-consultation.png`,
   };
 
+  const faqJsonLd = post.faq?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: post.faq.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a },
+        })),
+      }
+    : null;
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/en` },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}${BLOG_PATH}` },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: `${SITE_URL}${BLOG_PATH}/${post.slug}`,
+      },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <header className="site-header">
         <div className="container inner">
@@ -120,6 +157,15 @@ export default async function BlogPost({ params }: Props) {
             </div>
             <h1>{post.title}</h1>
 
+            {post.summary && (
+              <div className="safety" style={{ margin: "0 0 28px", background: "var(--green-050)" }}>
+                <p style={{ margin: 0, fontSize: "0.8rem", letterSpacing: "0.08em", color: "var(--green-700)" }}>
+                  KEY TAKEAWAY
+                </p>
+                <p style={{ margin: "6px 0 0" }}>{post.summary}</p>
+              </div>
+            )}
+
             {post.intro.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
@@ -132,6 +178,18 @@ export default async function BlogPost({ params }: Props) {
                 ))}
               </section>
             ))}
+
+            {post.faq && post.faq.length > 0 && (
+              <section>
+                <h2>Frequently asked questions</h2>
+                {post.faq.map((item) => (
+                  <div key={item.q} style={{ marginBottom: 18 }}>
+                    <h3 style={{ fontSize: "1.02rem", margin: "0 0 4px" }}>{item.q}</h3>
+                    <p style={{ margin: 0 }}>{item.a}</p>
+                  </div>
+                ))}
+              </section>
+            )}
 
             {/* 必須の注意文(全記事共通) */}
             <div className="safety" style={{ margin: "36px 0" }}>

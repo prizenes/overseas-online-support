@@ -14,7 +14,11 @@ export type BlogPost = {
   date: string; // ISO (YYYY-MM-DD)
   keywords: string[];
   intro: string[];
+  /** AEO: answer-first summary shown at the top of the article */
+  summary?: string;
   sections: BlogSection[];
+  /** AEO: FAQ shown at the end of the article and output as FAQPage JSON-LD */
+  faq?: { q: string; a: string }[];
   related: string[]; // slugs
 };
 
@@ -239,6 +243,133 @@ export const BLOG_POSTS: BlogPost[] = [
     related: [
       "japanese-speaking-exercise-support",
       "continue-home-exercise-after-physical-therapy",
+    ],
+  },
+  {
+    slug: "scheduling-online-exercise-support-across-time-zones",
+    title:
+      "Scheduling Online Exercise Support in Japanese Across Time Zones (US, Europe, Asia-Pacific)",
+    metaTitle:
+      "Online Exercise Support in Japanese Across Time Zones | US, Europe, Asia-Pacific",
+    description:
+      "How to schedule online exercise support in Japanese from the US, Europe, or Asia-Pacific. Typical session times by region, plus tips for coordinating with a physical therapist in Japan.",
+    category: "Scheduling",
+    date: "2026-10-15",
+    keywords: [
+      "online exercise support in Japanese time zone",
+      "Japanese physical therapist online time difference",
+      "exercise support for Japanese living abroad",
+    ],
+    summary:
+      "Sessions run during Japan's daytime and evening (roughly 9:00-19:00 Japan time). From the US that usually means your evening or night; from Europe, your morning; from Australia and Southeast Asia, your daytime. You can enter your preferred time in your own time zone, and it is converted to Japan time automatically.",
+    intro: [
+      "A time difference with Japan can make online support feel out of reach. In practice, the hours line up better than many people expect, and you do not have to do the math yourself.",
+      "This guide explains typical session times by region and how to coordinate a schedule when you request online exercise support in Japanese.",
+    ],
+    sections: [
+      {
+        h2: "Typical session times by region",
+        paragraphs: [
+          "Sessions are generally held within Japan's daytime and evening hours, roughly 9:00-19:00 Japan time. Here is how that tends to map to your local clock.",
+          "US East Coast: Japan's morning is your previous evening or night, so after-work evening hours are the most practical. US West Coast: Japan's morning and midday fall in your previous late afternoon to night, so evenings after work usually fit.",
+          "UK and Europe: Japan's afternoon and early evening line up with your morning, which works well before or early in the workday. Australia: the difference is only one to two hours, so daytime slots are available. Singapore, Thailand, and nearby: the difference is also small, so daytime works.",
+          "Regions that observe daylight saving time shift by one hour with the seasons, so please double-check the time on both clocks once a date is proposed.",
+        ],
+      },
+      {
+        h2: "Tips for coordinating a schedule",
+        paragraphs: [
+          "Enter your preferred time in your own local time zone on the inquiry form. The form detects your time zone and shows the equivalent Japan time automatically, so you do not need to convert it yourself.",
+          "If your preferred time falls outside the usual Japan-time window, you can still send the inquiry. We review it and coordinate a time by email. Offering a few alternative times makes scheduling faster.",
+          "Family members in Japan or abroad are welcome to join, so it also helps to check the clocks of everyone who will attend.",
+        ],
+      },
+      {
+        h2: "Getting started",
+        paragraphs: [
+          "Start with a free inquiry. No payment is requested at this stage. We confirm whether online support fits your situation and propose a time that works across time zones.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Can I use this service from the United States or Europe?",
+        a: "Yes. Sessions are coordinated around your time zone. You can enter your preferred time in your local time zone and it is converted to Japan time automatically.",
+      },
+      {
+        q: "What if my preferred time is outside Japan's usual hours?",
+        a: "You can still send the inquiry. We review it and coordinate a workable time with you by email.",
+      },
+      {
+        q: "Is the session held in Japanese?",
+        a: "Yes. Sessions are held in Japanese by a physical therapist from Japan, online.",
+      },
+    ],
+    related: [
+      "japanese-physical-therapist-online",
+      "japanese-speaking-exercise-support",
+    ],
+  },
+  {
+    slug: "questions-to-ask-after-local-physical-therapy",
+    title:
+      "Questions to Ask After Local Physical Therapy: A Checklist for Japanese Speakers Abroad",
+    metaTitle:
+      "Questions to Ask After Local Physical Therapy | Checklist for Japanese Speakers",
+    description:
+      "A practical checklist of questions to ask after local physical therapy, so you can continue home exercise with confidence. Includes how to organize the answers in Japanese.",
+    category: "Exercise Continuation",
+    date: "2026-10-15",
+    keywords: [
+      "questions to ask after physical therapy",
+      "continue home exercise after physical therapy",
+      "Japanese exercise support after physical therapy",
+    ],
+    summary:
+      "Before you leave your last local physical therapy visit, confirm five things: which movements to continue and how often, how much discomfort is acceptable, which signs mean you should seek care, when and how to progress, and when to check in next. Writing these down makes it much easier to keep your home routine going and to review it in Japanese later.",
+    intro: [
+      "Home exercise tends to fade after formal sessions end, especially when instructions were given in a second language. A short list of questions can close most of the gaps.",
+      "Use this checklist at your final local visit, or keep it as a reference if you are already at home wondering what to do next.",
+    ],
+    sections: [
+      {
+        h2: "Five questions to ask",
+        paragraphs: [
+          "1. Which movements should I continue, and how many times and how often?",
+          "2. How much discomfort is acceptable while I exercise, and what level means I should stop?",
+          "3. What signs mean I should seek local medical care?",
+          "4. When and how should I make the exercises harder or easier?",
+          "5. When should I have my progress checked again?",
+          "If any word is unfamiliar, ask for it to be explained or written down. With permission, a short video of the movement can help you remember it later.",
+        ],
+      },
+      {
+        h2: "Organizing the answers in Japanese",
+        paragraphs: [
+          "Online exercise guidance in Japanese can help you review what you were told and think through how to continue at home. It works alongside your local providers and supports the everyday work of keeping your routine going.",
+          "If your local provider gave you restrictions, please share them. They always take priority.",
+        ],
+      },
+      {
+        h2: "When to seek local care first",
+        paragraphs: [
+          "If new or stronger symptoms appear, contact your local provider before continuing the routine. Online support is not a substitute for local medical care.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Can I use online support in Japanese while still seeing a local provider?",
+        a: "Yes. Many people use it alongside local care to organize explanations and plan a home routine. Local instructions and restrictions always come first.",
+      },
+      {
+        q: "Can you review the exercises my local provider gave me?",
+        a: "Yes. Share the routine and how you currently do it, and we can help you organize a sustainable way to continue, within any restrictions you were given.",
+      },
+    ],
+    related: [
+      "continue-home-exercise-after-physical-therapy",
+      "japanese-physical-therapist-online",
     ],
   },
 ];

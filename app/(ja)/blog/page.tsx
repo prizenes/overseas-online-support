@@ -27,9 +27,12 @@ export default function BlogIndexPage() {
           海外で腰が痛い、膝が痛い、親の歩行や体力低下が心配など、日本語で身体の不安を整理したい方向けの記事です。
         </p>
         <div className="mt-10 grid gap-5">
-          {blogPosts.map((post) => (
+          {[...blogPosts].sort((a, b) => (a.date < b.date ? 1 : -1)).map((post) => (
             <article key={post.slug} className="rounded-md bg-white p-6 shadow-sm">
-              <h2 className="text-2xl font-bold leading-8 text-ink">
+              <p className="text-sm text-ink/55">
+                <time dateTime={post.date}>{post.date.replace(/-/g, ".")}</time>
+              </p>
+              <h2 className="mt-1 text-2xl font-bold leading-8 text-ink">
                 <Link href={`/blog/${post.slug}`} className="hover:text-sea">
                   {post.title}
                 </Link>
