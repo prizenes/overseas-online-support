@@ -11,7 +11,8 @@
 - 日本語記事は「強い痛み、しびれ、麻痺、急な症状悪化、転倒後の痛み」は現地医療機関を優先、と明記（記事ページ上部に自動表示される）。
 - 英語記事は以下を避ける：treatment / cure / diagnosis / guaranteed improvement / replace your doctor / replace your local physical therapist / online physical therapy treatment / we treat your pain
 - 価格・相談方法の事実は `lib/site.ts` と既存記事に合わせる（Google Meet、初回60分$79、決済は日程調整後）。
-- 公開前に、理学療法士（栗谷川氏）が内容を確認すること。
+- 自動公開（毎週月・木）。オーナーの許可済み。公開後に理学療法士（栗谷川氏）が内容を確認し、修正や取り下げが必要なら「この記事を修正／非公開にして」と指示する。
+- 自動公開でも、内容のルール（上記）に違反しそうな場合は公開せず中止する。
 
 ## 追加済みの記事（重複を避ける）
 JA: lib/blog-posts.ts の slug を参照
