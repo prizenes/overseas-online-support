@@ -372,6 +372,65 @@ export const BLOG_POSTS: BlogPost[] = [
       "japanese-physical-therapist-online",
     ],
   },
+  {
+    slug: "join-online-exercise-session-with-family-japanese",
+    title:
+      "Exercise Support for Japanese Families Abroad: How to Join a Session Together",
+    metaTitle:
+      "Joining an Online Exercise Session Together | Japanese Families Abroad",
+    description:
+      "How a family member in Japan and a loved one overseas can join an online exercise support session together in Japanese: what to prepare, how it works, and when to see local care first.",
+    category: "Family Support",
+    date: "2026-11-02",
+    keywords: [
+      "online exercise support family Japan overseas",
+      "Japanese exercise consultation for families abroad",
+      "join online session with family member in Japan",
+    ],
+    summary:
+      "A family member in Japan can join an online exercise support session alongside the person living abroad. Sessions run on Google Meet in Japanese; share the link, agree on what you want to ask, and have a few notes ready. The first session is 60 minutes for $79, with payment after scheduling. It does not replace local medical care.",
+    intro: [
+      "When someone lives overseas and their family is in Japan, worries about movement, walking, or staying active are often shared across distance. Joining one session together can help everyone hear the same explanation in the same language.",
+      "This guide covers how to prepare so the time is used well.",
+    ],
+    sections: [
+      {
+        h2: "How a joint session works",
+        paragraphs: [
+          "Sessions take place on Google Meet. After scheduling, you receive a link that both the person abroad and a family member in Japan can open from their own devices, so no one needs to be in the same place.",
+          "Time zones matter: pick a slot that is reasonable for both sides and confirm it during scheduling. Payment is requested after the date is set.",
+        ],
+      },
+      {
+        h2: "What to prepare beforehand",
+        paragraphs: [
+          "Agree in advance on two or three things you most want to ask, such as daily walking, home exercise, or how to keep a routine going. Write down recent changes in daily life and any instructions from a local doctor or physical therapist.",
+          "If the person abroad has been given restrictions locally, share them at the start. Those always take priority over anything discussed in the session.",
+        ],
+      },
+      {
+        h2: "What the session is, and what it is not",
+        paragraphs: [
+          "The session is Japanese-language exercise guidance: we talk through your situation and organize how to move forward with everyday exercise. It is not a replacement for local medical care.",
+          "If there is strong pain, numbness, weakness, a sudden worsening of symptoms, or pain after a fall, please contact local medical services first. You are welcome to come back to us afterward to talk through how to move.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Can a family member in Japan join the session?",
+        a: "Yes. Both of you can join the same Google Meet link from different locations. Please choose a time that works across both time zones.",
+      },
+      {
+        q: "How much is the first session?",
+        a: "The initial online body consultation is 60 minutes for $79. Payment is requested after the date has been scheduled.",
+      },
+    ],
+    related: [
+      "japanese-speaking-exercise-support",
+      "scheduling-online-exercise-support-across-time-zones",
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
