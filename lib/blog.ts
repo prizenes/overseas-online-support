@@ -431,6 +431,65 @@ export const BLOG_POSTS: BlogPost[] = [
       "scheduling-online-exercise-support-across-time-zones",
     ],
   },
+  {
+    slug: "walking-and-fall-prevention-older-parents-overseas",
+    title:
+      "Walking and Fall-Prevention Concerns for Older Parents Living Overseas",
+    metaTitle:
+      "Older Parents Abroad: Walking & Fall-Prevention Concerns | Japanese Support",
+    description:
+      "If an older parent living overseas seems less steady on their feet, here is how to organize what you notice, which everyday exercise questions to raise, and when to see local care first.",
+    category: "Family Support",
+    date: "2026-11-05",
+    keywords: [
+      "older parent overseas walking concern",
+      "fall prevention exercise Japanese family abroad",
+      "elderly parent exercise support in Japanese",
+    ],
+    summary:
+      "If an older parent living overseas seems less steady when walking, start by noting what you observe, such as pace, balance in daily routines, and where they feel unsure. Then bring those notes to an online session held in Japanese, where we organize everyday exercise and home setup questions. It does not replace local medical care; after any fall or sudden change, contact local medical services first.",
+    intro: [
+      "Many Japanese families are spread across countries, and a worry often arises from a short video call: a parent seems to walk more slowly, hold onto furniture, or avoid stairs. Distance makes it hard to know what is ordinary and what deserves attention.",
+      "This article offers a way to organize what you notice and decide where to take your questions.",
+    ],
+    sections: [
+      {
+        h2: "Start by writing down what you observe",
+        paragraphs: [
+          "Instead of trying to judge the cause, note simple facts: how far they walk in a day, whether they hesitate on stairs or when standing up, which rooms or paths feel unsure, and what has changed recently.",
+          "Short notes like these make any conversation, with a local doctor, a local physical therapist, or an exercise support session, more concrete.",
+        ],
+      },
+      {
+        h2: "Everyday exercise and home-setup questions to raise",
+        paragraphs: [
+          "In an online session held in Japanese, we can talk through the daily walking routine, simple movements that fit their home, and which activities feel comfortable or uncomfortable. A family member in Japan can join the same Google Meet link to hear the same explanation.",
+          "We can also discuss general points about the home, such as lighting, clutter, and the paths they use most, so the family can decide what to ask the parent or local professionals next.",
+        ],
+      },
+      {
+        h2: "When to see local care first",
+        paragraphs: [
+          "This support is not a replacement for local medical care. If your parent has had a fall, strong pain, numbness, weakness, or a sudden change in how they walk, please contact local medical services first.",
+          "Once any local advice is in place, you are welcome to come to us to talk through how to fit daily movement around it. The first session is 60 minutes for $79, with payment after scheduling.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Can I join a session on behalf of my parent?",
+        a: "Yes, a family member can join the same Google Meet link alongside your parent, or help prepare notes and questions beforehand. Please confirm a time that suits both time zones.",
+      },
+      {
+        q: "What if my parent has already fallen?",
+        a: "Please contact local medical services first. We can talk about everyday movement afterward, but we are not a substitute for local medical care.",
+      },
+    ],
+    related: [
+      "join-online-exercise-session-with-family-japanese",
+      "scheduling-online-exercise-support-across-time-zones",
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
